@@ -9,7 +9,7 @@
 
 # Changes in this fork #
 
-* all source files containing function ieee 
+* all source files (including the build/_deps subfolders) containing function ieee 
 substituted by huge() function
 
 * readmo.f
