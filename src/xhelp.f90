@@ -74,6 +74,11 @@ write(iunit,'(3x,a)') &
    "F. Musil, H. Neugebauer, J. Pisarek, C. Plett, P. Pracht, F. Pultar,", &
    "J. Seibert, P. Shushkov, S. Spicher, M. Stahn, M. Steiner, T. Strunk,", &
    "J. Stückrath, T. Rose, and J. Unsleber", &
+   "",&
+   "Special version for Android (aarch64, pie) ",&
+   "linked with high-performance BLAS and LAPACK libraries ",&
+   "compiled by A. Liska & V. Ruzickova",&
+   "on July 15, 2023.",&
    ""
 end subroutine citation
 

@@ -5,7 +5,32 @@
 [![DOI](https://img.shields.io/badge/DOI-10.1002%2Fwcms.1493-blue)](https://doi.org/10.1002/wcms.1493)
 [![Github Downloads All Releases](https://img.shields.io/github/downloads/grimme-lab/xtb/total)](https://github.com/grimme-lab/xtb/releases)
 
-This is the offical repository of the `xtb` program package developed by the Grimme group in Bonn.
+#### This is the XTB fork used in the mobile app PHREEQC plus ####
+
+# Changes in this fork #
+
+* all source files containing function ieee 
+substituted by huge() function
+
+* readmo.f
+added the stamp defining the release
+
+# Compilation #
+
+mkdir build
+cd build
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/and/static_python_libs
+export PATH=$PATH:/path/to/include
+rm CMakeCache.txt
+cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DFETCHCONTENT_FULLY_DISCONNECTED=ON
+open link.txt files and if they contain -lpython3.9, substitute by
+path/to/libpython3.7m.a
+and add -pie -fPIC
+make install
+
+####
+
+This is fork of the official repository of the `xtb` program package developed by the Grimme group in Bonn.
 
 <div align="center">
 <img src="./assets/logo/xtb.svg" alt="Extended Tight Binding" width="220">
@@ -96,7 +121,7 @@ conda search xtb --channel conda-forge
 
 [![Documentation Status](https://readthedocs.org/projects/xtb-docs/badge/?version=latest)](https://xtb-docs.readthedocs.io/en/latest/?badge=latest)
 
-The `xtb` documentation is hosted at [read-the-docs](https://xtb-docs.readthedocs.io/en/latest/contents.html).
+The `xtb` documentation is hosted at [read-the-docs](https://xtb-docs.readthedocs.io/en/latest/).
 
 
 ## Contributing
@@ -175,6 +200,11 @@ for GBSA and ALPB implicit solvation:
   *J. Chem. Theory Comput.*, **2021**, 17, 4250-4261
   DOI: [10.1021/acs.jctc.1c00471](https://doi.org/10.1021/acs.jctc.1c00471)
 
+for ddCOSMO and CPCM-X implicit solvation:
+- M.Stahn, S. Ehlert, S. Grimme,
+  *J. Phys. Chem. A*, **2023**, XX, XXX-XXX
+  DOI: [10.1021/acs.jpca.3c04382](https://doi.org/10.1021/acs.jpca.3c04382)
+
 for DFT-D4:
 - E. Caldeweyher, C. Bannwarth and S. Grimme, *J. Chem. Phys.*, **2017**, 147, 034112.
   DOI: [10.1063/1.4993215](https://dx.doi.org/10.1063/1.4993215)
@@ -201,7 +231,11 @@ for metadynamics refer to:
   
 for SPH calculations refer to:
 - S. Spicher and S. Grimme, *J. Chem. Theory Comput.*, **2021**, 17, 1701–1714.
-  DOI: [10.1021/acs.jctc.0c01306](https://doi.org/10.1021/acs.jctc.0c01306)  
+  DOI: [10.1021/acs.jctc.0c01306](https://doi.org/10.1021/acs.jctc.0c01306) 
+
+for ONIOM refer to:
+- C. Plett, A. Katbashev, S. Ehlert, S. Grimme, M. Bursch, *Phys. Chem. Chem. Phys.*, **2023**, 25, 17860-17868.
+  DOI: [10.1039/D3CP02178E](https://doi.org/10.1039/D3CP02178E)
 
 All references are available in [bibtex format](./assets/references.bib).
 
