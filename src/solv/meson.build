@@ -21,7 +21,6 @@ srcs += files(
   'born.f90',
   'cm5.f90',
   'cosmo.f90',
-  'cpx.F90',
   'gbsa.f90',
   'input.F90',
   'kernel.f90',
@@ -29,5 +28,4 @@ srcs += files(
   'model.f90',
   'sasa.f90',
   'state.f90',
-  'ddvolume.f90',
 )

@@ -48,7 +48,6 @@ tests = [
   'latticepoint',
   'molecule',
   'oniom',
-  'dipro',
   'pbc-tools',
   'peeq',
   'repulsion',
@@ -57,7 +56,6 @@ tests = [
   'thermo',
   'vertical',
   'wsc',
-  'cpx',
 ]
 
 test_srcs = files(

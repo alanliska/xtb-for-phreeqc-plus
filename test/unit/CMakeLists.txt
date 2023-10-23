@@ -35,7 +35,6 @@ set(
   "latticepoint"
   "molecule"
   "oniom"
-  "dipro"
   "pbc-tools"
   "peeq"
   "repulsion"
@@ -44,7 +43,6 @@ set(
   "thermo"
   "vertical"
   "wsc"
-  "cpx"
 )
 set(
   test-srcs

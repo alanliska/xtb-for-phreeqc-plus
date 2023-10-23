@@ -17,7 +17,6 @@
 
 add_subdirectory("api")
 add_subdirectory("coulomb")
-add_subdirectory("dipro")
 add_subdirectory("disp")
 add_subdirectory("docking")
 add_subdirectory("extern")
@@ -59,7 +58,6 @@ list(APPEND srcs
   "${dir}/define.f90"
   "${dir}/detrotra.f90"
   "${dir}/dipole.f90"
-  "${dir}/dipro.F90"
   "${dir}/drsp.f"
   "${dir}/dtrafo.f90"
   "${dir}/dynamic.f90"

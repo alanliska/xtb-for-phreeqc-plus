@@ -35,7 +35,6 @@ program tester
    use test_latticepoint, only : collect_latticepoint
    use test_molecule, only : collect_molecule
    use test_oniom, only : collect_oniom
-   use test_dipro, only : collect_dipro
    use test_pbc_tools, only : collect_pbc_tools
    use test_peeq, only : collect_peeq
    use test_repulsion, only : collect_repulsion
@@ -44,7 +43,6 @@ program tester
    use test_thermo, only : collect_thermo
    use test_vertical, only : collect_fukui
    use test_wsc, only : collect_wsc
-   use test_cpx, only : collect_cpx
    implicit none
    integer :: stat, is
    character(len=:), allocatable :: suite_name, test_name
@@ -72,7 +70,6 @@ program tester
       new_testsuite("latticepoint", collect_latticepoint), &
       new_testsuite("molecule", collect_molecule), &
       new_testsuite("oniom", collect_oniom), &
-      new_testsuite("dipro", collect_dipro), &
       new_testsuite("pbc-tools", collect_pbc_tools), &
       new_testsuite("peeq", collect_peeq), &
       new_testsuite("repulsion", collect_repulsion), &
@@ -80,8 +77,7 @@ program tester
       new_testsuite("tblite", collect_tblite), &
       new_testsuite("thermo", collect_thermo), &
       new_testsuite("vertical", collect_fukui), &
-      new_testsuite("wsc", collect_wsc), &
-      new_testsuite("cpx", collect_cpx) &
+      new_testsuite("wsc", collect_wsc) &
       ]
 
    call get_argument(1, suite_name)
