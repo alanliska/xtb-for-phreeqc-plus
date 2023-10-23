@@ -12,8 +12,7 @@
 * all source files (including the build/_deps subfolders) containing function ieee 
 substituted by huge() function (due to Android compiler limitations)
 
-* readmo.f
-added the stamp defining the release
+* added the stamp defining the release
 
 # Compilation #
 
