@@ -1,0 +1,118 @@
+Performing Fortran SOURCE FILE Test WITH_QP failed with the following output:
+Change Dir: /home/debian/b/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_86849/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_86849.dir/build.make CMakeFiles/cmTC_86849.dir/build
+gmake[1]: Entering directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_86849.dir/src.F.o
+/usr/bin/arm-linux-gnueabi-gfortran -DWITH_QP  -static -pie -fdefault-real-8 -fdefault-double-8 -ffree-line-length-none -fbacktrace  -c /home/debian/b/xtb/build/CMakeFiles/CMakeTmp/src.F -o CMakeFiles/cmTC_86849.dir/src.F.o
+/home/debian/b/xtb/build/CMakeFiles/CMakeTmp/src.F:1:2:
+
+    1 | integer, parameter :: qp = selected_real_kind(33); complex(qp) :: x; end
+      |  1
+Error: Non-numeric character in statement label at (1)
+/home/debian/b/xtb/build/CMakeFiles/CMakeTmp/src.F:1:59:
+
+    1 | integer, parameter :: qp = selected_real_kind(33); complex(qp) :: x; end
+      |                                                           1
+Error: Parameter ‘qp’ at (1) has not been declared or is a variable, which does not reduce to a constant expression
+gmake[1]: *** [CMakeFiles/cmTC_86849.dir/build.make:85: CMakeFiles/cmTC_86849.dir/src.F.o] Error 1
+gmake[1]: Leaving directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:140: cmTC_86849/fast] Error 2
+
+
+Source file was:
+integer, parameter :: qp = selected_real_kind(33); complex(qp) :: x; end
+Performing Fortran SOURCE FILE Test WITH_XDP failed with the following output:
+Change Dir: /home/debian/b/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_5d566/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5d566.dir/build.make CMakeFiles/cmTC_5d566.dir/build
+gmake[1]: Entering directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_5d566.dir/src.F.o
+/usr/bin/arm-linux-gnueabi-gfortran -DWITH_XDP  -static -pie -fdefault-real-8 -fdefault-double-8 -ffree-line-length-none -fbacktrace  -c /home/debian/b/xtb/build/CMakeFiles/CMakeTmp/src.F -o CMakeFiles/cmTC_5d566.dir/src.F.o
+/home/debian/b/xtb/build/CMakeFiles/CMakeTmp/src.F:2:4:
+
+    2 |   integer, parameter :: xdp = merge(-1, selected_real_kind(18), selected_real_kind(18) == selected_real_kind(33))
+      |    1
+Error: Non-numeric character in statement label at (1)
+/home/debian/b/xtb/build/CMakeFiles/CMakeTmp/src.F:3:4:
+
+    3 |   complex(xdp) :: x
+      |    1
+Error: Non-numeric character in statement label at (1)
+/home/debian/b/xtb/build/CMakeFiles/CMakeTmp/src.F:4:4:
+
+    4 |   end
+      |    1
+Error: Non-numeric character in statement label at (1)
+gmake[1]: *** [CMakeFiles/cmTC_5d566.dir/build.make:85: CMakeFiles/cmTC_5d566.dir/src.F.o] Error 1
+gmake[1]: Leaving directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:140: cmTC_5d566/fast] Error 2
+
+
+Source file was:
+
+  integer, parameter :: xdp = merge(-1, selected_real_kind(18), selected_real_kind(18) == selected_real_kind(33))
+  complex(xdp) :: x
+  end
+  
+Performing Fortran SOURCE FILE Test WITH_QP failed with the following output:
+Change Dir: /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/data/user/0/ru.iiec.pydroid3/files/bin/make -f Makefile cmTC_8275f/fast && /data/user/0/ru.iiec.pydroid3/files/bin/make  -f CMakeFiles/cmTC_8275f.dir/build.make CMakeFiles/cmTC_8275f.dir/build
+make[1]: Entering directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_8275f.dir/src.F.o
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran -DWITH_QP  -fdefault-real-8 -fdefault-double-8 -ffree-line-length-none -fbacktrace  -c /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/src.F -o CMakeFiles/cmTC_8275f.dir/src.F.o
+/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/src.F:1:2:
+
+    1 | integer, parameter :: qp = selected_real_kind(33); complex(qp) :: x; end
+      |  1
+Error: Non-numeric character in statement label at (1)
+/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/src.F:1:59:
+
+    1 | integer, parameter :: qp = selected_real_kind(33); complex(qp) :: x; end
+      |                                                           1
+Error: Parameter 'qp' at (1) has not been declared or is a variable, which does not reduce to a constant expression
+CMakeFiles/cmTC_8275f.dir/build.make:76: recipe for target 'CMakeFiles/cmTC_8275f.dir/src.F.o' failed
+make[1]: *** [CMakeFiles/cmTC_8275f.dir/src.F.o] Error 1
+make[1]: Leaving directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_8275f/fast' failed
+make: *** [cmTC_8275f/fast] Error 2
+
+
+Source file was:
+integer, parameter :: qp = selected_real_kind(33); complex(qp) :: x; end
+Performing Fortran SOURCE FILE Test WITH_XDP failed with the following output:
+Change Dir: /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/data/user/0/ru.iiec.pydroid3/files/bin/make -f Makefile cmTC_e1d9c/fast && /data/user/0/ru.iiec.pydroid3/files/bin/make  -f CMakeFiles/cmTC_e1d9c.dir/build.make CMakeFiles/cmTC_e1d9c.dir/build
+make[1]: Entering directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_e1d9c.dir/src.F.o
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran -DWITH_XDP  -fdefault-real-8 -fdefault-double-8 -ffree-line-length-none -fbacktrace  -c /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/src.F -o CMakeFiles/cmTC_e1d9c.dir/src.F.o
+/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/src.F:2:4:
+
+    2 |   integer, parameter :: xdp = merge(-1, selected_real_kind(18), selected_real_kind(18) == selected_real_kind(33))
+      |    1
+Error: Non-numeric character in statement label at (1)
+/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/src.F:3:4:
+
+    3 |   complex(xdp) :: x
+      |    1
+Error: Non-numeric character in statement label at (1)
+/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/src.F:4:4:
+
+    4 |   end
+      |    1
+Error: Non-numeric character in statement label at (1)
+CMakeFiles/cmTC_e1d9c.dir/build.make:76: recipe for target 'CMakeFiles/cmTC_e1d9c.dir/src.F.o' failed
+make[1]: *** [CMakeFiles/cmTC_e1d9c.dir/src.F.o] Error 1
+make[1]: Leaving directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_e1d9c/fast' failed
+make: *** [cmTC_e1d9c/fast] Error 2
+
+
+Source file was:
+
+  integer, parameter :: xdp = merge(-1, selected_real_kind(18), selected_real_kind(18) == selected_real_kind(33))
+  complex(xdp) :: x
+  end
+  

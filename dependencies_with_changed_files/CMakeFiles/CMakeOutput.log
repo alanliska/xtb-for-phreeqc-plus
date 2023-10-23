@@ -1,0 +1,883 @@
+The system is: Linux - 4.4.0-19041-Microsoft - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/arm-linux-gnueabi-gcc 
+Build flags: -static;-pie
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/debian/b/xtb/build/CMakeFiles/3.18.4/CompilerIdC/a.out"
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" succeeded.
+Compiler: /usr/bin/arm-linux-gnueabi-gfortran 
+Build flags: -static;-pie
+Id flags: -v 
+
+The output was:
+0
+Driving: /usr/bin/arm-linux-gnueabi-gfortran -static -pie -v CMakeFortranCompilerId.F -l gfortran -l m
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gfortran
+COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper
+Target: arm-linux-gnueabi
+Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.1 20210110 (Debian 10.2.1-6) 
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/f951 CMakeFortranCompilerId.F -ffixed-form -cpp=/tmp/ccLYCwBz.f90 -quiet -v -imultilib . -imultiarch arm-linux-gnueabi CMakeFortranCompilerId.F -quiet -dumpbase CMakeFortranCompilerId.F -mfloat-abi=soft -mtls-dialect=gnu -marm -march=armv5te -auxbase CMakeFortranCompilerId -version -fintrinsic-modules-path /usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude -fpre-include=/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include/finclude/arm-linux-gnueabi/math-vector-fortran.h -o /tmp/ccQ9RAKz.s
+GNU Fortran (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)
+	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/arm-linux-gnueabi"
+ignoring nonexistent directory "/usr/lib/gcc-cross/arm-linux-gnueabi/10/include-fixed"
+ignoring nonexistent directory "/usr/include/arm-linux-gnueabi"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/include
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include
+ /usr/include
+End of search list.
+GNU Fortran2008 (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)
+	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/as -v -march=armv5te -mfloat-abi=soft -meabi=5 -o /tmp/ccLXpCJy.o /tmp/ccQ9RAKz.s
+GNU assembler version 2.35.2 (arm-linux-gnueabi) using BFD version (GNU Binutils for Debian) 2.35.2
+Reading specs from /usr/lib/gcc-cross/arm-linux-gnueabi/10/libgfortran.spec
+rename spec lib to liborig
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/
+LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/collect2 -plugin /usr/lib/gcc-cross/arm-linux-gnueabi/10/liblto_plugin.so -plugin-opt=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper -plugin-opt=-fresolution=/tmp/ccU4jKFA.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lm -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lc --sysroot=/ --build-id -Bstatic -X --hash-style=gnu --as-needed -m armelf_linux_eabi /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crt1.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crti.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtbeginT.o -L/usr/lib/gcc-cross/arm-linux-gnueabi/10 -L/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib -L/lib/arm-linux-gnueabi -L/usr/lib/arm-linux-gnueabi /tmp/ccLXpCJy.o -lgfortran -lm --start-group -lgcc -lgcc_eh -lm -lgcc -lgcc_eh -lc --end-group /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtend.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crtn.o
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+
+
+Compilation of the Fortran compiler identification source "CMakeFortranCompilerId.F" produced "a.out"
+
+The Fortran compiler identification is GNU, found in "/home/debian/b/xtb/build/CMakeFiles/3.18.4/CompilerIdFortran/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/debian/b/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_f4d93/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f4d93.dir/build.make CMakeFiles/cmTC_f4d93.dir/build
+gmake[1]: Entering directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o
+/usr/bin/arm-linux-gnueabi-gcc   -static -pie    -v -o CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gcc
+Target: arm-linux-gnueabi
+Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.1 20210110 (Debian 10.2.1-6) 
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-o' 'CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/cc1 -quiet -v -imultilib . -imultiarch arm-linux-gnueabi /usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mfloat-abi=soft -mtls-dialect=gnu -marm -march=armv5te -auxbase-strip CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccVX7V0u.s
+GNU C17 (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)
+	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/arm-linux-gnueabi"
+ignoring nonexistent directory "/usr/lib/gcc-cross/arm-linux-gnueabi/10/include-fixed"
+ignoring nonexistent directory "/usr/include/arm-linux-gnueabi"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/include
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include
+ /usr/include
+End of search list.
+GNU C17 (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)
+	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 2b101962588f0fd74847796eadb41084
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-o' 'CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/as -v -march=armv5te -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o /tmp/ccVX7V0u.s
+GNU assembler version 2.35.2 (arm-linux-gnueabi) using BFD version (GNU Binutils for Debian) 2.35.2
+COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/
+LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-o' 'CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+Linking C executable cmTC_f4d93
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f4d93.dir/link.txt --verbose=1
+/usr/bin/arm-linux-gnueabi-gcc -static -pie  -static -pie -v CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o -o cmTC_f4d93 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper
+Target: arm-linux-gnueabi
+Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.1 20210110 (Debian 10.2.1-6) 
+COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/
+LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/
+COLLECT_GCC_OPTIONS='-static' '-static' '-pie' '-v' '-o' 'cmTC_f4d93'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/collect2 -plugin /usr/lib/gcc-cross/arm-linux-gnueabi/10/liblto_plugin.so -plugin-opt=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper -plugin-opt=-fresolution=/tmp/ccakAMpW.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lc --sysroot=/ --build-id -Bstatic -X --hash-style=gnu --as-needed -m armelf_linux_eabi -o cmTC_f4d93 /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crt1.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crti.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtbeginT.o -L/usr/lib/gcc-cross/arm-linux-gnueabi/10 -L/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib -L/lib/arm-linux-gnueabi -L/usr/lib/arm-linux-gnueabi CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o --start-group -lgcc -lgcc_eh -lc --end-group /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtend.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crtn.o
+COLLECT_GCC_OPTIONS='-static' '-static' '-pie' '-v' '-o' 'cmTC_f4d93'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+gmake[1]: Leaving directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc-cross/arm-linux-gnueabi/10/include]
+    add: [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/include] ==> [/usr/lib/gcc-cross/arm-linux-gnueabi/10/include]
+  collapse include dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include] ==> [/usr/arm-linux-gnueabi/include]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/lib/gcc-cross/arm-linux-gnueabi/10/include;/usr/arm-linux-gnueabi/include;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(arm-linux-gnueabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/debian/b/xtb/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_f4d93/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f4d93.dir/build.make CMakeFiles/cmTC_f4d93.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/arm-linux-gnueabi-gcc   -static -pie    -v -o CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gcc]
+  ignore line: [Target: arm-linux-gnueabi]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 10.2.1 20210110 (Debian 10.2.1-6) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-o' 'CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/cc1 -quiet -v -imultilib . -imultiarch arm-linux-gnueabi /usr/share/cmake-3.18/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mfloat-abi=soft -mtls-dialect=gnu -marm -march=armv5te -auxbase-strip CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccVX7V0u.s]
+  ignore line: [GNU C17 (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)]
+  ignore line: [	compiled by GNU C version 10.2.1 20210110  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.0  isl version isl-0.23-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/arm-linux-gnueabi"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc-cross/arm-linux-gnueabi/10/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/usr/include/arm-linux-gnueabi"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/include]
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C17 (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)]
+  ignore line: [	compiled by GNU C version 10.2.1 20210110  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.0  isl version isl-0.23-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 2b101962588f0fd74847796eadb41084]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-o' 'CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/as -v -march=armv5te -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o /tmp/ccVX7V0u.s]
+  ignore line: [GNU assembler version 2.35.2 (arm-linux-gnueabi) using BFD version (GNU Binutils for Debian) 2.35.2]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-o' 'CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  ignore line: [Linking C executable cmTC_f4d93]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f4d93.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/arm-linux-gnueabi-gcc -static -pie  -static -pie -v CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o -o cmTC_f4d93 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper]
+  ignore line: [Target: arm-linux-gnueabi]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 10.2.1 20210110 (Debian 10.2.1-6) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-static' '-pie' '-v' '-o' 'cmTC_f4d93'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  link line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/collect2 -plugin /usr/lib/gcc-cross/arm-linux-gnueabi/10/liblto_plugin.so -plugin-opt=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper -plugin-opt=-fresolution=/tmp/ccakAMpW.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lc --sysroot=/ --build-id -Bstatic -X --hash-style=gnu --as-needed -m armelf_linux_eabi -o cmTC_f4d93 /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crt1.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crti.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtbeginT.o -L/usr/lib/gcc-cross/arm-linux-gnueabi/10 -L/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib -L/lib/arm-linux-gnueabi -L/usr/lib/arm-linux-gnueabi CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o --start-group -lgcc -lgcc_eh -lc --end-group /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtend.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crtn.o]
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccakAMpW.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [-Bstatic] ==> ignore
+    arg [-X] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-m] ==> ignore
+    arg [armelf_linux_eabi] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_f4d93] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crt1.o] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crti.o] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/crtbeginT.o] ==> ignore
+    arg [-L/usr/lib/gcc-cross/arm-linux-gnueabi/10] ==> dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10]
+    arg [-L/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib] ==> dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib]
+    arg [-L/lib/arm-linux-gnueabi] ==> dir [/lib/arm-linux-gnueabi]
+    arg [-L/usr/lib/arm-linux-gnueabi] ==> dir [/usr/lib/arm-linux-gnueabi]
+    arg [CMakeFiles/cmTC_f4d93.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [--start-group] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_eh] ==> lib [gcc_eh]
+    arg [-lc] ==> lib [c]
+    arg [--end-group] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/crtend.o] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crtn.o] ==> ignore
+  remove lib [gcc_eh]
+  collapse library dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10] ==> [/usr/lib/gcc-cross/arm-linux-gnueabi/10]
+  collapse library dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib] ==> [/usr/arm-linux-gnueabi/lib]
+  collapse library dir [/lib/arm-linux-gnueabi] ==> [/lib/arm-linux-gnueabi]
+  collapse library dir [/usr/lib/arm-linux-gnueabi] ==> [/usr/lib/arm-linux-gnueabi]
+  implicit libs: [gcc;c]
+  implicit dirs: [/usr/lib/gcc-cross/arm-linux-gnueabi/10;/usr/arm-linux-gnueabi/lib;/lib/arm-linux-gnueabi;/usr/lib/arm-linux-gnueabi]
+  implicit fwks: []
+
+
+Detecting Fortran compiler ABI info compiled with the following output:
+Change Dir: /home/debian/b/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_fca8a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fca8a.dir/build.make CMakeFiles/cmTC_fca8a.dir/build
+gmake[1]: Entering directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o
+/usr/bin/arm-linux-gnueabi-gfortran   -static -pie    -v -c /usr/share/cmake-3.18/Modules/CMakeFortranCompilerABI.F -o CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gfortran
+Target: arm-linux-gnueabi
+Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.1 20210110 (Debian 10.2.1-6) 
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-c' '-o' 'CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/f951 /usr/share/cmake-3.18/Modules/CMakeFortranCompilerABI.F -ffixed-form -cpp=/tmp/ccCjaClt.f90 -quiet -v -imultilib . -imultiarch arm-linux-gnueabi /usr/share/cmake-3.18/Modules/CMakeFortranCompilerABI.F -quiet -dumpbase CMakeFortranCompilerABI.F -mfloat-abi=soft -mtls-dialect=gnu -marm -march=armv5te -auxbase-strip CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -version -fintrinsic-modules-path /usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude -fpre-include=/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include/finclude/arm-linux-gnueabi/math-vector-fortran.h -o /tmp/ccIs8yct.s
+GNU Fortran (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)
+	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/arm-linux-gnueabi"
+ignoring nonexistent directory "/usr/lib/gcc-cross/arm-linux-gnueabi/10/include-fixed"
+ignoring nonexistent directory "/usr/include/arm-linux-gnueabi"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/include
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include
+ /usr/include
+End of search list.
+GNU Fortran2008 (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)
+	compiled by GNU C version 10.2.1 20210110, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.0, isl version isl-0.23-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-c' '-o' 'CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/as -v -march=armv5te -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o /tmp/ccIs8yct.s
+GNU assembler version 2.35.2 (arm-linux-gnueabi) using BFD version (GNU Binutils for Debian) 2.35.2
+COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/
+LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/
+COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-c' '-o' 'CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+Linking Fortran executable cmTC_fca8a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fca8a.dir/link.txt --verbose=1
+/usr/bin/arm-linux-gnueabi-gfortran -static -pie -v -static -pie  CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -o cmTC_fca8a 
+Driving: /usr/bin/arm-linux-gnueabi-gfortran -static -v -static -pie CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -o cmTC_fca8a -l gfortran -l m
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gfortran
+COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper
+Target: arm-linux-gnueabi
+Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 10.2.1 20210110 (Debian 10.2.1-6) 
+Reading specs from /usr/lib/gcc-cross/arm-linux-gnueabi/10/libgfortran.spec
+rename spec lib to liborig
+COLLECT_GCC_OPTIONS='-static' '-v' '-static' '-pie' '-o' 'cmTC_fca8a'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/
+LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/
+COLLECT_GCC_OPTIONS='-static' '-v' '-static' '-pie' '-o' 'cmTC_fca8a'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+ /usr/lib/gcc-cross/arm-linux-gnueabi/10/collect2 -plugin /usr/lib/gcc-cross/arm-linux-gnueabi/10/liblto_plugin.so -plugin-opt=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper -plugin-opt=-fresolution=/tmp/cc7zaYWT.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lm -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lc --sysroot=/ --build-id -Bstatic -X --hash-style=gnu --as-needed -m armelf_linux_eabi -o cmTC_fca8a /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crt1.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crti.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtbeginT.o -L/usr/lib/gcc-cross/arm-linux-gnueabi/10 -L/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib -L/lib/arm-linux-gnueabi -L/usr/lib/arm-linux-gnueabi CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -lgfortran -lm --start-group -lgcc -lgcc_eh -lm -lgcc -lgcc_eh -lc --end-group /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtend.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crtn.o
+COLLECT_GCC_OPTIONS='-static' '-v' '-static' '-pie' '-o' 'cmTC_fca8a'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te'
+gmake[1]: Leaving directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed Fortran implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude]
+    add: [/usr/lib/gcc-cross/arm-linux-gnueabi/10/include]
+    add: [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude] ==> [/usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude]
+  collapse include dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/include] ==> [/usr/lib/gcc-cross/arm-linux-gnueabi/10/include]
+  collapse include dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include] ==> [/usr/arm-linux-gnueabi/include]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude;/usr/lib/gcc-cross/arm-linux-gnueabi/10/include;/usr/arm-linux-gnueabi/include;/usr/include]
+
+
+Parsed Fortran implicit link information from above output:
+  link line regex: [^( *|.*[/\])(arm-linux-gnueabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/debian/b/xtb/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_fca8a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fca8a.dir/build.make CMakeFiles/cmTC_fca8a.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building Fortran object CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o]
+  ignore line: [/usr/bin/arm-linux-gnueabi-gfortran   -static -pie    -v -c /usr/share/cmake-3.18/Modules/CMakeFortranCompilerABI.F -o CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gfortran]
+  ignore line: [Target: arm-linux-gnueabi]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 10.2.1 20210110 (Debian 10.2.1-6) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-c' '-o' 'CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/f951 /usr/share/cmake-3.18/Modules/CMakeFortranCompilerABI.F -ffixed-form -cpp=/tmp/ccCjaClt.f90 -quiet -v -imultilib . -imultiarch arm-linux-gnueabi /usr/share/cmake-3.18/Modules/CMakeFortranCompilerABI.F -quiet -dumpbase CMakeFortranCompilerABI.F -mfloat-abi=soft -mtls-dialect=gnu -marm -march=armv5te -auxbase-strip CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -version -fintrinsic-modules-path /usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude -fpre-include=/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include/finclude/arm-linux-gnueabi/math-vector-fortran.h -o /tmp/ccIs8yct.s]
+  ignore line: [GNU Fortran (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)]
+  ignore line: [	compiled by GNU C version 10.2.1 20210110  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.0  isl version isl-0.23-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/arm-linux-gnueabi"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc-cross/arm-linux-gnueabi/10/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/usr/include/arm-linux-gnueabi"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/finclude]
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/include]
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/include]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU Fortran2008 (Debian 10.2.1-6) version 10.2.1 20210110 (arm-linux-gnueabi)]
+  ignore line: [	compiled by GNU C version 10.2.1 20210110  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.0  isl version isl-0.23-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-c' '-o' 'CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  ignore line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/as -v -march=armv5te -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o /tmp/ccIs8yct.s]
+  ignore line: [GNU assembler version 2.35.2 (arm-linux-gnueabi) using BFD version (GNU Binutils for Debian) 2.35.2]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-pie' '-v' '-c' '-o' 'CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  ignore line: [Linking Fortran executable cmTC_fca8a]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fca8a.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/arm-linux-gnueabi-gfortran -static -pie -v -static -pie  CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -o cmTC_fca8a ]
+  ignore line: [Driving: /usr/bin/arm-linux-gnueabi-gfortran -static -v -static -pie CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -o cmTC_fca8a -l gfortran -l m]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/arm-linux-gnueabi-gfortran]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper]
+  ignore line: [Target: arm-linux-gnueabi]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Debian 10.2.1-6' --with-bugurl=file:///usr/share/doc/gcc-10/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-10 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --without-target-system-zlib --enable-multiarch --disable-sjlj-exceptions --with-arch=armv5te --with-float=soft --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=arm-linux-gnueabi --program-prefix=arm-linux-gnueabi- --includedir=/usr/arm-linux-gnueabi/include --with-build-config=bootstrap-lto-lean --enable-link-mutex]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 10.2.1 20210110 (Debian 10.2.1-6) ]
+  ignore line: [Reading specs from /usr/lib/gcc-cross/arm-linux-gnueabi/10/libgfortran.spec]
+  ignore line: [rename spec lib to liborig]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-v' '-static' '-pie' '-o' 'cmTC_fca8a'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  ignore line: [COMPILER_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc-cross/arm-linux-gnueabi/10/:/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/:/lib/arm-linux-gnueabi/:/lib/:/usr/lib/arm-linux-gnueabi/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-static' '-v' '-static' '-pie' '-o' 'cmTC_fca8a'  '-mfloat-abi=soft' '-mtls-dialect=gnu' '-marm' '-march=armv5te']
+  link line: [ /usr/lib/gcc-cross/arm-linux-gnueabi/10/collect2 -plugin /usr/lib/gcc-cross/arm-linux-gnueabi/10/liblto_plugin.so -plugin-opt=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper -plugin-opt=-fresolution=/tmp/cc7zaYWT.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lm -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lc --sysroot=/ --build-id -Bstatic -X --hash-style=gnu --as-needed -m armelf_linux_eabi -o cmTC_fca8a /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crt1.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crti.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtbeginT.o -L/usr/lib/gcc-cross/arm-linux-gnueabi/10 -L/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib -L/lib/arm-linux-gnueabi -L/usr/lib/arm-linux-gnueabi CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o -lgfortran -lm --start-group -lgcc -lgcc_eh -lm -lgcc -lgcc_eh -lc --end-group /usr/lib/gcc-cross/arm-linux-gnueabi/10/crtend.o /usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crtn.o]
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc-cross/arm-linux-gnueabi/10/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cc7zaYWT.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
+    arg [-plugin-opt=-pass-through=-lm] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [-Bstatic] ==> ignore
+    arg [-X] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-m] ==> ignore
+    arg [armelf_linux_eabi] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_fca8a] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crt1.o] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crti.o] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/crtbeginT.o] ==> ignore
+    arg [-L/usr/lib/gcc-cross/arm-linux-gnueabi/10] ==> dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10]
+    arg [-L/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib] ==> dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib]
+    arg [-L/lib/arm-linux-gnueabi] ==> dir [/lib/arm-linux-gnueabi]
+    arg [-L/usr/lib/arm-linux-gnueabi] ==> dir [/usr/lib/arm-linux-gnueabi]
+    arg [CMakeFiles/cmTC_fca8a.dir/CMakeFortranCompilerABI.F.o] ==> ignore
+    arg [-lgfortran] ==> lib [gfortran]
+    arg [-lm] ==> lib [m]
+    arg [--start-group] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_eh] ==> lib [gcc_eh]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lgcc_eh] ==> lib [gcc_eh]
+    arg [-lc] ==> lib [c]
+    arg [--end-group] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/crtend.o] ==> ignore
+    arg [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib/crtn.o] ==> ignore
+  remove lib [gcc_eh]
+  remove lib [gcc_eh]
+  collapse library dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10] ==> [/usr/lib/gcc-cross/arm-linux-gnueabi/10]
+  collapse library dir [/usr/lib/gcc-cross/arm-linux-gnueabi/10/../../../../arm-linux-gnueabi/lib] ==> [/usr/arm-linux-gnueabi/lib]
+  collapse library dir [/lib/arm-linux-gnueabi] ==> [/lib/arm-linux-gnueabi]
+  collapse library dir [/usr/lib/arm-linux-gnueabi] ==> [/usr/lib/arm-linux-gnueabi]
+  implicit libs: [gfortran;m;gcc;m;gcc;c]
+  implicit dirs: [/usr/lib/gcc-cross/arm-linux-gnueabi/10;/usr/arm-linux-gnueabi/lib;/lib/arm-linux-gnueabi;/usr/lib/arm-linux-gnueabi]
+  implicit fwks: []
+
+
+Determining if the Fortran compiler supports Fortran 90 passed with the following output:
+Change Dir: /home/debian/b/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_32806/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_32806.dir/build.make CMakeFiles/cmTC_32806.dir/build
+gmake[1]: Entering directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_32806.dir/testFortranCompilerF90.f90.o
+/usr/bin/arm-linux-gnueabi-gfortran   -static -pie  -c /home/debian/b/xtb/build/CMakeFiles/CMakeTmp/testFortranCompilerF90.f90 -o CMakeFiles/cmTC_32806.dir/testFortranCompilerF90.f90.o
+Linking Fortran executable cmTC_32806
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_32806.dir/link.txt --verbose=1
+/usr/bin/arm-linux-gnueabi-gfortran -static -pie  -static -pie  CMakeFiles/cmTC_32806.dir/testFortranCompilerF90.f90.o -o cmTC_32806 
+gmake[1]: Leaving directory '/home/debian/b/xtb/build/CMakeFiles/CMakeTmp'
+
+
+
+The system is: Linux - 4.19.157-perf+ - aarch64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/3.20.3/CompilerIdC/a.out"
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" succeeded.
+Compiler: /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran 
+Build flags: 
+Id flags: -v 
+
+The output was:
+0
+Driving: /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran -v CMakeFortranCompilerId.F -l gfortran -l m
+Using built-in specs.
+COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran
+Target: aarch64-linux-android
+Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 11.1.0 (GCC) 
+COLLECT_GCC_OPTIONS='-v' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a-'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/f951 CMakeFortranCompilerId.F -ffixed-form -cpp=/data/user/0/ru.iiec.pydroid3/cache/ccD186Yu.f90 -quiet -v -iprefix /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/ CMakeFortranCompilerId.F -mbionic -fpic -mno-outline-atomics -quiet -dumpdir a- -dumpbase CMakeFortranCompilerId.F -dumpbase-ext .F -mlittle-endian -mabi=lp64 -version -fintrinsic-modules-path /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude -o /data/user/0/ru.iiec.pydroid3/cache/ccBs45L7.s
+GNU Fortran (GCC) version 11.1.0 (aarch64-linux-android)
+	compiled by GNU C version 11.1.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include-fixed"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include
+End of search list.
+GNU Fortran2008 (GCC) version 11.1.0 (aarch64-linux-android)
+	compiled by GNU C version 11.1.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COLLECT_GCC_OPTIONS='-v' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a-'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/as -v -EL -mabi=lp64 -o /data/user/0/ru.iiec.pydroid3/cache/ccuTi9jD.o /data/user/0/ru.iiec.pydroid3/cache/ccBs45L7.s
+GNU assembler version 2.36.1 (aarch64-linux-android) using BFD version (GNU Binutils) 2.36.1
+Reading specs from /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/libgfortran.spec
+rename spec lib to liborig
+COLLECT_GCC_OPTIONS='-v' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a-'
+COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/
+LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/
+COLLECT_GCC_OPTIONS='-v' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a.'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/collect2 --eh-frame-hdr -dynamic-linker /system/bin/linker64 -X -EL -maarch64linux -z noexecstack -z relro -z now -pie /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0 -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib /data/user/0/ru.iiec.pydroid3/cache/ccuTi9jD.o -lgfortran -lm -lgcc -lm -lgcc -lc -ldl -lgcc /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o
+COLLECT_GCC_OPTIONS='-v' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'a.'
+
+
+Compilation of the Fortran compiler identification source "CMakeFortranCompilerId.F" produced "a.out"
+
+The Fortran compiler identification is GNU, found in "/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/3.20.3/CompilerIdFortran/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/data/user/0/ru.iiec.pydroid3/files/bin/make -f Makefile cmTC_6020f/fast && /data/user/0/ru.iiec.pydroid3/files/bin/make  -f CMakeFiles/cmTC_6020f.dir/build.make CMakeFiles/cmTC_6020f.dir/build
+make[1]: Entering directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc   -v -o CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o -c /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc
+Target: aarch64-linux-android
+Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 11.1.0 (GCC) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_6020f.dir/'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/cc1 -quiet -v -iprefix /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/ /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeCCompilerABI.c -mbionic -fpic -mno-outline-atomics -quiet -dumpdir CMakeFiles/cmTC_6020f.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mlittle-endian -mabi=lp64 -version -o /data/user/0/ru.iiec.pydroid3/cache/ccMJLN2U.s
+GNU C17 (GCC) version 11.1.0 (aarch64-linux-android)
+	compiled by GNU C version 11.1.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include-fixed"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include
+End of search list.
+GNU C17 (GCC) version 11.1.0 (aarch64-linux-android)
+	compiled by GNU C version 11.1.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 5c91d3ea7d65bdf23fd4cde6d644c16d
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_6020f.dir/'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o /data/user/0/ru.iiec.pydroid3/cache/ccMJLN2U.s
+GNU assembler version 2.36.1 (aarch64-linux-android) using BFD version (GNU Binutils) 2.36.1
+COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/
+LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.'
+Linking C executable cmTC_6020f
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6020f.dir/link.txt --verbose=1
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc  -v CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o -o cmTC_6020f -Wl,--no-as-needed -lpython3.9 -llog
+Using built-in specs.
+COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc
+Target: aarch64-linux-android
+Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 11.1.0 (GCC) 
+COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/
+LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6020f' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_6020f.'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/collect2 --eh-frame-hdr -dynamic-linker /system/bin/linker64 -X -EL -maarch64linux -z noexecstack -z relro -z now -pie -o cmTC_6020f /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0 -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o --no-as-needed -lpython3.9 -llog -lgcc -lc -ldl -lgcc /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6020f' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_6020f.'
+make[1]: Leaving directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include]
+    add: [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed]
+    add: [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include]
+  end of search list found
+  collapse include dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include]
+  collapse include dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include-fixed]
+  collapse include dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include] ==> [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/include]
+  implicit include dirs: [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include;/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include-fixed;/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/data/user/0/ru.iiec.pydroid3/files/bin/make -f Makefile cmTC_6020f/fast && /data/user/0/ru.iiec.pydroid3/files/bin/make  -f CMakeFiles/cmTC_6020f.dir/build.make CMakeFiles/cmTC_6020f.dir/build]
+  ignore line: [make[1]: Entering directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc   -v -o CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o -c /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc]
+  ignore line: [Target: aarch64-linux-android]
+  ignore line: [Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 11.1.0 (GCC) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_6020f.dir/']
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/cc1 -quiet -v -iprefix /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/ /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeCCompilerABI.c -mbionic -fpic -mno-outline-atomics -quiet -dumpdir CMakeFiles/cmTC_6020f.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mlittle-endian -mabi=lp64 -version -o /data/user/0/ru.iiec.pydroid3/cache/ccMJLN2U.s]
+  ignore line: [GNU C17 (GCC) version 11.1.0 (aarch64-linux-android)]
+  ignore line: [	compiled by GNU C version 11.1.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"]
+  ignore line: [ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include"]
+  ignore line: [ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"]
+  ignore line: [ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include]
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed]
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C17 (GCC) version 11.1.0 (aarch64-linux-android)]
+  ignore line: [	compiled by GNU C version 11.1.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 5c91d3ea7d65bdf23fd4cde6d644c16d]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_6020f.dir/']
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o /data/user/0/ru.iiec.pydroid3/cache/ccMJLN2U.s]
+  ignore line: [GNU assembler version 2.36.1 (aarch64-linux-android) using BFD version (GNU Binutils) 2.36.1]
+  ignore line: [COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/]
+  ignore line: [LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o' '-c' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.']
+  ignore line: [Linking C executable cmTC_6020f]
+  ignore line: [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6020f.dir/link.txt --verbose=1]
+  ignore line: [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc  -v CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o -o cmTC_6020f -Wl --no-as-needed -lpython3.9 -llog]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cc]
+  ignore line: [Target: aarch64-linux-android]
+  ignore line: [Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 11.1.0 (GCC) ]
+  ignore line: [COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/]
+  ignore line: [LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6020f' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_6020f.']
+  link line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/collect2 --eh-frame-hdr -dynamic-linker /system/bin/linker64 -X -EL -maarch64linux -z noexecstack -z relro -z now -pie -o cmTC_6020f /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0 -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o --no-as-needed -lpython3.9 -llog -lgcc -lc -ldl -lgcc /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+    arg [/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/system/bin/linker64] ==> ignore
+    arg [-X] ==> ignore
+    arg [-EL] ==> ignore
+    arg [-maarch64linux] ==> ignore
+    arg [-znoexecstack] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_6020f] ==> ignore
+    arg [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o] ==> obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o]
+    arg [-L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0] ==> dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0]
+    arg [-L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc] ==> dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc]
+    arg [-L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib] ==> dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib]
+    arg [CMakeFiles/cmTC_6020f.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [--no-as-needed] ==> ignore
+    arg [-lpython3.9] ==> lib [python3.9]
+    arg [-llog] ==> lib [log]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-ldl] ==> lib [dl]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o] ==> obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+  collapse obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o]
+  collapse obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+  collapse library dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0]
+  collapse library dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc]
+  collapse library dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib] ==> [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/lib]
+  implicit libs: [python3.9;log;gcc;c;dl;gcc]
+  implicit objs: [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o;/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+  implicit dirs: [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0;/data/user/0/ru.iiec.pydroid3/files/lib/gcc;/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/lib]
+  implicit fwks: []
+
+
+Detecting Fortran compiler ABI info compiled with the following output:
+Change Dir: /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/data/user/0/ru.iiec.pydroid3/files/bin/make -f Makefile cmTC_3ffda/fast && /data/user/0/ru.iiec.pydroid3/files/bin/make  -f CMakeFiles/cmTC_3ffda.dir/build.make CMakeFiles/cmTC_3ffda.dir/build
+make[1]: Entering directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran   -v -c /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeFortranCompilerABI.F -o CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o
+Using built-in specs.
+COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran
+Target: aarch64-linux-android
+Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 11.1.0 (GCC) 
+COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_3ffda.dir/'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/f951 /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeFortranCompilerABI.F -ffixed-form -cpp=/data/user/0/ru.iiec.pydroid3/cache/ccTIEDix.f90 -quiet -v -iprefix /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/ /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeFortranCompilerABI.F -mbionic -fpic -mno-outline-atomics -quiet -dumpdir CMakeFiles/cmTC_3ffda.dir/ -dumpbase CMakeFortranCompilerABI.F.F -dumpbase-ext .F -mlittle-endian -mabi=lp64 -version -fintrinsic-modules-path /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude -o /data/user/0/ru.iiec.pydroid3/cache/cczG0nHe.s
+GNU Fortran (GCC) version 11.1.0 (aarch64-linux-android)
+	compiled by GNU C version 11.1.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include-fixed"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"
+ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"
+ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include
+End of search list.
+GNU Fortran2008 (GCC) version 11.1.0 (aarch64-linux-android)
+	compiled by GNU C version 11.1.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_3ffda.dir/'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o /data/user/0/ru.iiec.pydroid3/cache/cczG0nHe.s
+GNU assembler version 2.36.1 (aarch64-linux-android) using BFD version (GNU Binutils) 2.36.1
+COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/
+LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/
+COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.'
+Linking Fortran executable cmTC_3ffda
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ffda.dir/link.txt --verbose=1
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran  -v CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o -o cmTC_3ffda 
+Driving: /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran -v CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o -o cmTC_3ffda -l gfortran -l m
+Using built-in specs.
+COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran
+Target: aarch64-linux-android
+Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie
+Thread model: posix
+Supported LTO compression algorithms: zlib
+gcc version 11.1.0 (GCC) 
+Reading specs from /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/libgfortran.spec
+rename spec lib to liborig
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3ffda' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_3ffda-'
+COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/
+LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3ffda' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_3ffda.'
+ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/collect2 --eh-frame-hdr -dynamic-linker /system/bin/linker64 -X -EL -maarch64linux -z noexecstack -z relro -z now -pie -o cmTC_3ffda /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0 -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o -lgfortran -lm -lgcc -lm -lgcc -lc -ldl -lgcc /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3ffda' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_3ffda.'
+make[1]: Leaving directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed Fortran implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude]
+    add: [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include]
+    add: [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed]
+    add: [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include]
+  end of search list found
+  collapse include dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/finclude]
+  collapse include dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include]
+  collapse include dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include-fixed]
+  collapse include dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include] ==> [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/include]
+  implicit include dirs: [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/finclude;/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include;/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/include-fixed;/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/include]
+
+
+Parsed Fortran implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/data/user/0/ru.iiec.pydroid3/files/bin/make -f Makefile cmTC_3ffda/fast && /data/user/0/ru.iiec.pydroid3/files/bin/make  -f CMakeFiles/cmTC_3ffda.dir/build.make CMakeFiles/cmTC_3ffda.dir/build]
+  ignore line: [make[1]: Entering directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building Fortran object CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o]
+  ignore line: [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran   -v -c /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeFortranCompilerABI.F -o CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran]
+  ignore line: [Target: aarch64-linux-android]
+  ignore line: [Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 11.1.0 (GCC) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_3ffda.dir/']
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/f951 /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeFortranCompilerABI.F -ffixed-form -cpp=/data/user/0/ru.iiec.pydroid3/cache/ccTIEDix.f90 -quiet -v -iprefix /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/ /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/share/cmake-3.20/Modules/CMakeFortranCompilerABI.F -mbionic -fpic -mno-outline-atomics -quiet -dumpdir CMakeFiles/cmTC_3ffda.dir/ -dumpbase CMakeFortranCompilerABI.F.F -dumpbase-ext .F -mlittle-endian -mabi=lp64 -version -fintrinsic-modules-path /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude -o /data/user/0/ru.iiec.pydroid3/cache/cczG0nHe.s]
+  ignore line: [GNU Fortran (GCC) version 11.1.0 (aarch64-linux-android)]
+  ignore line: [	compiled by GNU C version 11.1.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"]
+  ignore line: [ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include"]
+  ignore line: [ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include-support-lp"]
+  ignore line: [ignoring nonexistent directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/sys-include"]
+  ignore line: [ignoring duplicate directory "/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/../../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/finclude]
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include]
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/include-fixed]
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU Fortran2008 (GCC) version 11.1.0 (aarch64-linux-android)]
+  ignore line: [	compiled by GNU C version 11.1.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_3ffda.dir/']
+  ignore line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o /data/user/0/ru.iiec.pydroid3/cache/cczG0nHe.s]
+  ignore line: [GNU assembler version 2.36.1 (aarch64-linux-android) using BFD version (GNU Binutils) 2.36.1]
+  ignore line: [COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/]
+  ignore line: [LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-c' '-o' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.']
+  ignore line: [Linking Fortran executable cmTC_3ffda]
+  ignore line: [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ffda.dir/link.txt --verbose=1]
+  ignore line: [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran  -v CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o -o cmTC_3ffda ]
+  ignore line: [Driving: /data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran -v CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o -o cmTC_3ffda -l gfortran -l m]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran]
+  ignore line: [Target: aarch64-linux-android]
+  ignore line: [Configured with: ../configure --host=aarch64-linux-androidpy --target=aarch64-linux-android --enable-static --disable-shared --enable-languages=c,c++,fortran --enable-initfini-array --disable-lto --disable-libquadmath --disable-multilib --disable-libgomp --disable-libmudflap --enable-target-optspace --enable-threads --disable-libatomic --disable-tls --disable-nls --disable-sjlj-exceptions --disable-libstdc++-v3 --disable-libsanitizer --disable-plugin --disable-libgcc --disable-libssp --disable-docs --disable-libitm --with-gnu-as --with-gnu-ld --prefix=/home/n0n3m4/Desktop/Pydroid/ctoolchain/OutDir --with-mpc=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-mpfr=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --with-gmp=/home/n0n3m4/Desktop/Pydroid/ctoolchain/gmpbuilt --enable-default-pie]
+  ignore line: [Thread model: posix]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 11.1.0 (GCC) ]
+  ignore line: [Reading specs from /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/libgfortran.spec]
+  ignore line: [rename spec lib to liborig]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3ffda' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_3ffda-']
+  ignore line: [COMPILER_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/bin/]
+  ignore line: [LIBRARY_PATH=/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/:/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3ffda' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_3ffda.']
+  link line: [ /data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/collect2 --eh-frame-hdr -dynamic-linker /system/bin/linker64 -X -EL -maarch64linux -z noexecstack -z relro -z now -pie -o cmTC_3ffda /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0 -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc -L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o -lgfortran -lm -lgcc -lm -lgcc -lc -ldl -lgcc /data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+    arg [/data/user/0/ru.iiec.pydroid3/files/bin/../libexec/gcc/aarch64-linux-android/11.1.0/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/system/bin/linker64] ==> ignore
+    arg [-X] ==> ignore
+    arg [-EL] ==> ignore
+    arg [-maarch64linux] ==> ignore
+    arg [-znoexecstack] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-znow] ==> ignore
+    arg [-pie] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_3ffda] ==> ignore
+    arg [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o] ==> obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o]
+    arg [-L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0] ==> dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0]
+    arg [-L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc] ==> dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc]
+    arg [-L/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib] ==> dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib]
+    arg [CMakeFiles/cmTC_3ffda.dir/CMakeFortranCompilerABI.F.o] ==> ignore
+    arg [-lgfortran] ==> lib [gfortran]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-ldl] ==> lib [dl]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o] ==> obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+  collapse obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o]
+  collapse obj [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+  collapse library dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0]
+  collapse library dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc] ==> [/data/user/0/ru.iiec.pydroid3/files/lib/gcc]
+  collapse library dir [/data/user/0/ru.iiec.pydroid3/files/bin/../lib/gcc/aarch64-linux-android/11.1.0/../../../../aarch64-linux-android/lib] ==> [/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/lib]
+  implicit libs: [gfortran;m;gcc;m;gcc;c;dl;gcc]
+  implicit objs: [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtbegin_dynamic.o;/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0/crtend_android.o]
+  implicit dirs: [/data/user/0/ru.iiec.pydroid3/files/lib/gcc/aarch64-linux-android/11.1.0;/data/user/0/ru.iiec.pydroid3/files/lib/gcc;/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/lib]
+  implicit fwks: []
+
+
+Determining if the Fortran compiler supports Fortran 90 passed with the following output:
+Change Dir: /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/data/user/0/ru.iiec.pydroid3/files/bin/make -f Makefile cmTC_07ba6/fast && /data/user/0/ru.iiec.pydroid3/files/bin/make  -f CMakeFiles/cmTC_07ba6.dir/build.make CMakeFiles/cmTC_07ba6.dir/build
+make[1]: Entering directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_07ba6.dir/testFortranCompilerF90.f90.o
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran    -c /data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp/testFortranCompilerF90.f90 -o CMakeFiles/cmTC_07ba6.dir/testFortranCompilerF90.f90.o
+Linking Fortran executable cmTC_07ba6
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07ba6.dir/link.txt --verbose=1
+/data/user/0/ru.iiec.pydroid3/files/aarch64-linux-android/bin/gfortran CMakeFiles/cmTC_07ba6.dir/testFortranCompilerF90.f90.o -o cmTC_07ba6 
+make[1]: Leaving directory '/data/user/0/ru.iiec.pydroid3/app_HOME/xtb/build/CMakeFiles/CMakeTmp'
+
+
+

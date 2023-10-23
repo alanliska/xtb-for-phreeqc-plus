@@ -1,0 +1,10 @@
+# The fortran modules provided by this target.
+provides
+ xtb_prog_argparser.mod
+ xtb_prog_dock.mod
+ xtb_prog_info.mod
+ xtb_prog_ir.mod
+ xtb_prog_main.mod
+ xtb_prog_submodules.mod
+ xtb_prog_thermo.mod
+ xtb_prog_topology.mod

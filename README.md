@@ -17,7 +17,7 @@ added the stamp defining the release
 
 # Compilation #
 
-mkdir build
+mv dependencies_with_changed_files build
 cd build
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/and/static_python_libs
 export PATH=$PATH:/path/to/include
