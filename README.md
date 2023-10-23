@@ -10,14 +10,16 @@
 # Changes in this fork #
 
 * all source files (including the build/_deps subfolders) containing function ieee 
-substituted by huge() function
+substituted by huge() function (due to Android compiler limitations)
 
 * readmo.f
 added the stamp defining the release
 
 # Compilation #
 
-mv dependencies_with_changed_files build
+unzip _deps.zip
+mkdir build
+mv _deps ./build/
 cd build
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/and/static_python_libs
 export PATH=$PATH:/path/to/include
