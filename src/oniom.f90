@@ -14,9 +14,8 @@
 ! You should have received a copy of the GNU Lesser General Public Licen
 ! along with xtb.  If not, see <https://www.gnu.org/licenses/>.
 
-!-----------------------------------------------------------------------
-!> ONIOM implementaion
-!-----------------------------------------------------------------------
+!> Implementaion of the ONIOM method
+!> publication: https://doi.org/10.1039/D3CP02178E (further reference) 
 module xtb_oniom
 
    use xtb_mctc_accuracy, only: wp
@@ -156,18 +155,18 @@ subroutine newOniomCalculator(self, env, mol, input)
    
    endif
    
-   ! write user-defined inner region list into array !
+   ! write user-defined inner region list as raw string into array !
    self%list = TAtomList(list=input%second_arg)
    call self%list%to_list(self%idx)
 
-   if (len(self%list) == 0) then
-      call env%error("No atoms in inner region '"//input%second_arg//"'")
+   if (len(self%list) .eq. 0 .or. self%list%error) then
+      call env%error("Invalid inner region: '"//input%second_arg//"'")
       return
    end if
 
    ! check inner region !
    if (any(self%idx < 1) .or. any(self%idx > mol%n)) then
-      call env%error('The specification of inner region is not correct')
+      call env%error('Out of bound inner region')
       return
    end if
 
@@ -456,7 +455,7 @@ subroutine singlepoint(self, env, mol, chk, printlevel, restart, energy, gradien
    ! Postprocessing !
    !----------------!
 
-   ! ONIOM energy !
+   ! ONIOM energy / reference formula (1,2) !
    energy = energy + energy_model_high - energy_model_low
    results%e_total = energy
    
@@ -582,7 +581,7 @@ subroutine writeInfo(self, unit, mol)
 end subroutine writeInfo
 
 !> create inner region
-subroutine cutbond(self, env, mol, chk, topo, inner_mol,jacobian,idx2)
+subroutine cutbond(self, env, mol, chk, topo, inner_mol, jacobian, idx2)
 
    use xtb_type_molecule, only: init
    use xtb_topology, only: makeBondTopology, topologyToNeighbourList
@@ -611,54 +610,93 @@ subroutine cutbond(self, env, mol, chk, topo, inner_mol,jacobian,idx2)
    type(TTopology), allocatable, intent(inout) :: topo
    
    !> jacobian matrix 
-   real(wp),allocatable, intent(inout) :: jacobian(:,:)
+   real(wp), allocatable, intent(inout) :: jacobian(:,:)
    
    !> list of inner region atom indices + host atoms
-   integer,allocatable, intent(out) :: idx2(:)
+   integer, allocatable, intent(out) :: idx2(:)
+  
    
+   !> outer region geometry
+   type(TMolecule), allocatable :: outer_mol
+
    !> neighbour list
    type(TNeighbourList) :: neighList
       
    !> pair-wise indices for cutbound  
    integer, allocatable :: brokenBondPairs(:,:)
    
-   integer, allocatable :: at(:), at2(:)
+   integer, allocatable :: at(:), at_out(:)
    integer, allocatable :: bonded(:, :)
-   real(wp), allocatable :: xyz(:, :), xyz2(:, :)
+   real(wp), allocatable :: xyz(:, :), xyz_out(:, :)
    character(len=:),allocatable :: fname_inner
    
    !> if the both bonded atoms are inside the inner region
    logical :: inside
    
-   integer :: i, j, n, k, pre_last,iterator
+   !> control output
+   logical :: set1 = .true.
+   logical :: set2 = .true.
+
+   !> number of LAs
+   integer :: nla
+
+   integer :: i, j, k, pre_last, pre_last_out, iterator
    integer :: io
+
+   !> initial no. atoms in inner & outer regions
+   integer :: in, out
+
+   !> loop indices
+   integer :: in_itr, out_itr
 
    !-------!
    ! SETUP !
    !-------!
 
    inside = .FALSE.
+   
+   ! initial number of atoms in inner/outer region without LAs !
+   in = len(self%list)
+   out = mol%n - in 
+   in_itr = 1
+   out_itr = 1
+   nla = 0
 
-   ! initial number of atoms in inner region without LAs !
-   n = len(self%list)
-   
    ! allocate accordingly the basic molecular data !
-   allocate (at2(size(self%idx)))
-   allocate (xyz2(3, size(self%idx)))
-   allocate (at(n))
-   allocate (xyz(3, n))
-   allocate (idx2(size(self%idx)))
-   
+   allocate (at(in))
+   allocate (xyz(3, in))
+   allocate (at_out(out))
+   allocate (xyz_out(3, out))
+
    ! save inner region list in the matching array !
    idx2=self%idx
    
-   ! assign initial inner region !
-   do i = 1, size(self%idx)
-      at(i) = mol%at(self%idx(i))
-      at2(i) = mol%at(self%idx(i))
-      xyz(:, i) = mol%xyz(:, self%idx(i))
-      xyz2(:, i) = mol%xyz(:, self%idx(i))
-   end do
+   ! divide initial mol into inner and outer regions !
+   do i = 1, mol%n
+      if (i==self%idx(in_itr)) then
+         
+         if (in_itr > in) then
+            call env%error("The internal error, inconsistent molecular dimensionality", source=source) 
+            return
+         endif
+         
+         at(in_itr) = mol%at(i)
+         xyz(:, in_itr) = mol%xyz(:, i)
+         in_itr = in_itr + 1
+      
+      else
+         
+         if (out_itr > out) then 
+            call env%error("The internal error, inconsistent molecular dimensionality", source=source) 
+            return
+         endif
+         
+         at_out(out_itr) = mol%at(i)
+         xyz_out(:, out_itr) = mol%xyz(:, i)
+         out_itr = out_itr + 1
+      
+      endif
+   enddo 
  
    ! initialiaze jacobian as identity !
    call create_jacobian(jacobian,at)
@@ -737,40 +775,47 @@ subroutine cutbond(self, env, mol, chk, topo, inner_mol,jacobian,idx2)
                   end select
                
                endif
-                  
-               ! increment array size by 1 !
-               pre_last = size(at)
+
+               ! adjust ordinal numbers !
                call resize(at)
                call resize(idx2)
+               call resize(at_out)
          
-               ! save host atom index !
-               idx2(pre_last+1) = bonded(2,j)
+               ! save index of the host atom -> jacobian ! 
+               idx2(size(idx2)) = bonded(2,j)
+
                ! assign new atom as H !
-               at(pre_last + 1) = 1
+               at(size(at)) = 1
+               at_out(size(at_out)) = 1
                
+               ! number of LAs !
+               nla = nla + 1
                
                ! adjust coordinate matrix !
                call resize(xyz)
+               call resize(xyz_out)
       
                ! increment Jacobian ! 
                call resize_jacobian(jacobian)   
                
                ! determine new position of added H atom !
-               call coord(env,mol,xyz,self%idx(i),bonded(2,j),jacobian,i)
+               call coord(env,mol,xyz,xyz_out,self%idx(i),bonded(2,j),jacobian,i)
                
             end if
+            
             inside = .FALSE.
-         
          
          ! if atom in the list is bonded !
          else if (bonded(2, j) == self%idx(i)) then
             
             ! iterate again through the list !
             do k = 1, size(self%idx)
+                  
+               ! inside inner region !
                if (self%idx(k) == bonded(1, j)) then
-                  ! inside inner region !
                   inside = .TRUE.
                end if
+
             end do
 
             ! bond is broken !
@@ -788,26 +833,33 @@ subroutine cutbond(self, env, mol, chk, topo, inner_mol,jacobian,idx2)
                
                endif
 
-               ! increment array size by 1 !
-               pre_last = size(at)
+               ! adjust ordinal numbers !
                call resize(at)
+               call resize(at_out)
                call resize(idx2)
                
-               ! save host atom index !
-               idx2(pre_last+1) = bonded(1,j)
+               ! save index of the host atom -> jacobian ! 
+               idx2(size(idx2)) = bonded(1,j)
+               
                ! assign new atom as H !
-               at(pre_last + 1) = 1
+               at(size(at)) = 1
+               at_out(size(at_out)) = 1
+               
+               ! number of LAs !
+               nla = nla + 1
                
                ! adjust coordinate matrix !
                call resize(xyz)
+               call resize(xyz_out)
                
                ! increment Jacobian matrix !
                call resize_jacobian(jacobian)   
                
                ! determine new position of added H atom !
-               call coord(env,mol, xyz, self%idx(i), bonded(1, j),jacobian,i)
+               call coord(env,mol, xyz, xyz_out, self%idx(i), bonded(1, j),jacobian,i)
             
             end if
+
             inside = .FALSE.
          
          end if
@@ -817,22 +869,108 @@ subroutine cutbond(self, env, mol, chk, topo, inner_mol,jacobian,idx2)
    !----------------!
    ! POSTPROCESSING !
    !----------------!
+   
+   ! outer region saturation !
+   if (set%oniom_settings%outer) then
+      
+      ! initialize !
+      allocate(outer_mol)
+      call init(outer_mol, at_out, xyz_out)
 
-   ! initialize new mol object !
+      ! create Xmol file !
+      call open_file(io, "outer_region.xyz", "w")
+      call writeMolecule(outer_mol, io, filetype%xyz)
+      call close_file(io)
+   
+      ! check LAs postions !
+      if (set2) call check_dist(outer_mol,env,nla)
+   
+   end if
+   
+   ! initialize inner region mol !
    call init(inner_mol, at, xyz)
    
-   ! create Xmol file for inner region !
+   ! check LAs postions !
+   if (set1) call check_dist(inner_mol,env,nla)
+  
+   ! to distinguish cases with/without SP !
    if (set%oniom_settings%cut_inner) then
       fname_inner = "inner_region_without_h.xyz" 
    else
       fname_inner = "inner_region.xyz"
    endif
 
+   ! create Xmol file for inner region !
    call open_file(io, fname_inner, "w")
    call writeMolecule(inner_mol, io, filetype%xyz)
    call close_file(io) 
+   
+   call env%checkpoint("ONIOM is terminated")
+
+   set1 = .false.
+   set2 = .false.  
 
 end subroutine cutbond
+
+subroutine check_dist(mol, env, nla)
+
+   use xtb_mctc_convert, only : aatoau
+
+   !> source
+   character(len=*), parameter :: source = "check_dist"
+
+   !> molecular structure
+   type(TMolecule), intent(in) :: mol 
+
+   !> calculation environment 
+   type(TEnvironment), intent(inout) :: env
+
+   !> LA's  indices
+   integer, intent(in) :: nla
+
+
+   !> warning message
+   character(len=:), allocatable :: warn
+   
+   !> ordinal numbers as characters 
+   character(len=3) :: dummy1, dummy2
+
+   !> minimal allowed distance
+   real(wp) :: min_dist
+
+   !> loop indices
+   integer :: i,j
+
+   !> inner/outer region with LA's
+   integer :: regsize_saturated
+
+   !> inner/outer region without LA's 
+   integer :: regsize_raw
+
+   ! calculate the start and end iterator for loop !
+   regsize_raw = mol%n - nla + 1
+   regsize_saturated = mol%n
+
+   ! H2 bond length !
+   min_dist = 0.74 * aatoau   
+
+   ! check all LA's !
+   do i = regsize_raw, regsize_saturated
+      do j = 1, regsize_saturated
+         if (i.ne.j) then
+            if (mol%dist(j,i) < min_dist) then
+               write (dummy1, '(I3)') i
+               write (dummy2, '(I3)') j
+               warn = "The distance b/n atoms "//dummy1//" (LA) and " &
+                     & //dummy2//" is less then min," &
+                     & //achar(10) //"please examine carefully your cutout region"  
+               call env%warning(warn,source)
+            endif
+         endif
+      enddo
+   enddo
+
+end subroutine check_dist
 
 !> increase atomic number array by 1 
 subroutine new_atom(at)
@@ -841,10 +979,14 @@ subroutine new_atom(at)
    integer, allocatable, intent(inout) :: at(:)
    integer, allocatable :: tmp2(:)
 
-   allocate (tmp2(size(at) + 1))
-   tmp2(:size(at)) = at(:size(at))
-   deallocate (at)
-   call move_alloc(tmp2, at)
+   if (.not. allocated(at)) then
+      allocate(at(1))
+   else
+      allocate (tmp2(size(at) + 1))
+      tmp2(:size(at)) = at(:size(at))
+      deallocate (at)
+      call move_alloc(tmp2, at)
+   endif
 
 end subroutine new_atom
 
@@ -852,8 +994,8 @@ end subroutine new_atom
 subroutine new_coordinates(xyz)
    
    implicit none
-   real, allocatable :: xyz(:,:)
-   real, allocatable :: tmp1(:,:)
+   real(wp), allocatable :: xyz(:,:)
+   real(wp), allocatable :: tmp1(:,:)
    integer :: atom_num
 
    atom_num = size(xyz, 2)
@@ -908,7 +1050,7 @@ subroutine resize_jacobian(matrix)
 end subroutine resize_jacobian
 
 !> calculate new postion for LA and corresponding J
-subroutine newcoord(env,mol,xyz,idx1,idx2,jacobian,connectorPosition)
+subroutine newcoord(env,mol,xyz,xyz_out,idx1,idx2,jacobian,connectorPosition)
    
    implicit none
    
@@ -921,8 +1063,11 @@ subroutine newcoord(env,mol,xyz,idx1,idx2,jacobian,connectorPosition)
    !> molecular structure data
    type(TMolecule), intent(in) :: mol
    
-   !> coordinate matrix
+   !> inreg coordinate matrix 
    real(wp), intent(inout) :: xyz(:, :)
+   
+   !> outreg coordinate matrix
+   real(wp), intent(inout) :: xyz_out(:, :)
    
    !> connector (one that stays in the inner region)
    integer, intent(in) :: idx1
@@ -1192,8 +1337,9 @@ subroutine newcoord(env,mol,xyz,idx1,idx2,jacobian,connectorPosition)
       endif
    endif
 
-   ! LA coordinates !
+   ! LA coordinates / reference formula (3) !
    xyz(:, size(xyz, 2)) = xyz1 + (xyz2 - xyz1) * prefactor
+   xyz_out(:,size(xyz_out,2)) = xyz2 + (xyz1 - xyz2) * prefactor 
       
    ! determine the difference between LA and LAH cooordinates !
    ! (yes -> change from derived to fixed) ! 
@@ -1268,30 +1414,34 @@ subroutine derivative(jacobian,con,link,prefactor,xyz,idx1,idx2,dist_12,derived)
    !-------------------------!
    ! JACOBIAN INCREMENTATION !
    !-------------------------!
-
    do i=1,3
       
-      ! fixed mode !
+      ! fixed mode / reference ESI formula (3,4) !
       if(.not.derived) then
-         jacobian(counter1(i),counter2(i))=1-prefactor
-         jacobian(counter2(i),counter2(i))=prefactor
+         jacobian(counter1(i),counter2(i)) = 1 - prefactor
+         jacobian(counter2(i),counter2(i)) = prefactor
       
-      ! derived mode !
+      ! derived mode / reference ESI formula (6,7) !
       else
+
          ! x coordinate !
          if (i==1) then
-            jacobian(counter2(i),counter2(i)) =(prefactor*(   (xyz(2,idx1)**2) - 2*xyz(2,idx1)*xyz(2,idx2) + (xyz(2,idx2)**2) + ((xyz(3,idx1)-xyz(3,idx2))**2)  ))/(dist_12**(3.0_wp/2.0_wp))
+            jacobian(counter2(i),counter2(i)) = prefactor * ( (xyz(2,idx1)-xyz(2,idx2)**2) & 
+                                                            & + ((xyz(3,idx1)-xyz(3,idx2))**2)  ) / dist_12
          
          ! y coordinate !
          else if (i==2) then
-            jacobian(counter2(i),counter2(i)) =(prefactor*(   (xyz(1,idx1)**2) - 2*xyz(1,idx1)*xyz(1,idx2) + (xyz(1,idx2)**2) + ((xyz(3,idx1)-xyz(3,idx2))**2)  ))/(dist_12**(3.0_wp/2.0_wp))
+            jacobian(counter2(i),counter2(i)) = prefactor * ( (xyz(1,idx1)-xyz(1,idx2)**2) & 
+                                                            & + ((xyz(3,idx1)-xyz(3,idx2))**2)  ) / dist_12
          
          ! z coordinate !
          else
-            jacobian(counter2(i),counter2(i)) =(prefactor*(   (xyz(1,idx1)**2) - 2*xyz(1,idx1)*xyz(1,idx2) + (xyz(1,idx2)**2) + ((xyz(2,idx1)-xyz(2,idx2))**2)  ))/(dist_12**(3.0_wp/2.0_wp))
+            jacobian(counter2(i),counter2(i)) = prefactor * ( (xyz(1,idx1)-xyz(1,idx2)**2) & 
+                                                            & + ((xyz(2,idx1)-xyz(2,idx2))**2)  ) / dist_12
+         
          endif
          
-         jacobian(counter1(i),counter2(i)) = (prefactor*((xyz(i,idx2)-xyz(i,idx1))**2))/(dist_12**(3.0_wp/2.0_wp)) - (prefactor/(sqrt(dist_12))) + 1.0_wp 
+         jacobian(counter1(i),counter2(i)) = 1.0_wp - prefactor * (1.0_wp - (((xyz(i,idx2)-xyz(i,idx1))**2) / dist_12 ))
       
       endif
    
