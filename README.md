@@ -1,35 +1,39 @@
+# This is the XTB fork used in the mobile app PHREEQC plus
+
+## Changes in this fork
+
+* all source files (including the build/_deps subfolders) containing function ieee - substituted by huge() function (due to Android compiler limitations)
+* added the stamp defining the release
+
+## Compilation
+
+```bash
+$ unzip _deps.zip
+$ mkdir build
+$ mv _deps ./build/
+$ cd build
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/and/static_python_libs
+$ export PATH=$PATH:/path/to/include
+$ rm CMakeCache.txt
+$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DFETCHCONTENT_FULLY_DISCONNECTED=ON
+```
+
+open link.txt files and if they contain -lpython3.9, substitute by path/to/libpython3.7m.a and add -pie -fPIC
+
+```bash
+$ make install
+```
+
+
+
+####
+
 # Semiempirical Extended Tight-Binding Program Package
 
 [![License](https://img.shields.io/github/license/grimme-lab/xtb)](https://github.com/grimme-lab/xtb/blob/master/COPYING)
 [![Latest Version](https://img.shields.io/github/v/release/grimme-lab/xtb)](https://github.com/grimme-lab/xtb/releases/latest)
 [![DOI](https://img.shields.io/badge/DOI-10.1002%2Fwcms.1493-blue)](https://doi.org/10.1002/wcms.1493)
 [![Github Downloads All Releases](https://img.shields.io/github/downloads/grimme-lab/xtb/total)](https://github.com/grimme-lab/xtb/releases)
-
-#### This is the XTB fork used in the mobile app PHREEQC plus ####
-
-# Changes in this fork #
-
-* all source files (including the build/_deps subfolders) containing function ieee 
-substituted by huge() function (due to Android compiler limitations)
-
-* added the stamp defining the release
-
-# Compilation #
-
-unzip _deps.zip
-mkdir build
-mv _deps ./build/
-cd build
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/and/static_python_libs
-export PATH=$PATH:/path/to/include
-rm CMakeCache.txt
-cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DFETCHCONTENT_FULLY_DISCONNECTED=ON
-open link.txt files and if they contain -lpython3.9, substitute by
-path/to/libpython3.7m.a
-and add -pie -fPIC
-make install
-
-####
 
 This is fork of the official repository of the `xtb` program package developed by the Grimme group in Bonn.
 
