@@ -31,7 +31,7 @@ module xtb_scf
    use xtb_type_coulomb, only : TCoulomb
    use xtb_type_data
    use xtb_type_environment
-   use xtb_type_latticepoint, only : TLatticePoint, init
+   use xtb_type_latticepoint, only : TLatticePoint, init_l
    use xtb_type_molecule, only : TMolecule
    use xtb_type_solvation, only : TSolvation
    use xtb_type_param
@@ -142,6 +142,8 @@ subroutine scf(env, mol, wfn, basis, pcem, xtbData, solvation, &
    real(wp),allocatable :: dSEdcn(:, :)
    real(wp),allocatable :: shellShift(:, :)
    real(wp),allocatable :: temp(:)
+   real(wp),allocatable :: Pa(:, :)
+   real(wp),allocatable :: Pb(:, :)
    real(wp),allocatable :: Pew(:, :)
    real(wp),allocatable :: H(:, :)
    integer :: nid
@@ -280,7 +282,7 @@ subroutine scf(env, mol, wfn, basis, pcem, xtbData, solvation, &
 !  do the first SCC by full diag
    if(egap.eq.0) startpdiag=1000
 
-   call init(latp, env, mol, 60.0_wp)
+   call init_l(latp, env, mol, 60.0_wp)
 
 !ccccccccccccccccccc
 ! note: H is in eV!
@@ -477,6 +479,8 @@ subroutine scf(env, mol, wfn, basis, pcem, xtbData, solvation, &
       write(env%unit,scifmt) "-> SCF convergence ",scfconv, "Eh  "
       write(env%unit,scifmt) "-> wf. convergence ",qconv,   "e   "
       write(env%unit,dblfmt) "Broyden damping    ",set%broydamp,"    "
+      write(env%unit,intfmt) "net charge         ",nint(mol%chrg)
+      write(env%unit,intfmt) "unpaired electrons ",mol%uhf
       write(env%unit,'(10x,51("."))')
    endif
 
@@ -858,11 +862,29 @@ subroutine scf(env, mol, wfn, basis, pcem, xtbData, solvation, &
       end if
 
    endif printing
-
-   ! ------------------------------------------------------------------------
-   ! get Wiberg bond orders
-   call get_wiberg(mol%n, basis%nao, mol%at, mol%xyz, wfn%P, S, wfn%wbo, &
-      & basis%fila2)
+   
+   !--------------------------!
+   ! Wiberg-Mayer bond orders !
+   !--------------------------!
+   
+   ! closed-shell !
+   if (wfn%nopen == 0) then
+      
+      call get_wiberg(mol%n, basis%nao, mol%at, mol%xyz,wfn%P, S, wfn%wbo,basis%fila2)
+   
+   ! (restricted) open-shell !
+   else if (wfn%nopen > 0) then   
+      
+      allocate(Pa(basis%nao,basis%nao))
+      allocate(Pb(basis%nao,basis%nao))
+      
+      ! obtain alpha and beta spin densities !
+      call dmat(basis%nao, wfn%focca, wfn%C, Pa) 
+      call dmat(basis%nao, wfn%foccb, wfn%C, Pb) 
+      
+      call get_unrestricted_wiberg(mol%n, basis%nao, mol%at, mol%xyz, Pa, Pb ,S, wfn%wbo, &
+         & basis%fila2)
+   endif
 
    ! ------------------------------------------------------------------------
    ! dipole calculation (always done because its free)
@@ -883,7 +905,7 @@ subroutine scf(env, mol, wfn, basis, pcem, xtbData, solvation, &
    if (.not.allocated(scD4)) then
       energy = energy + ed
    endif
-   res%e_elec  = eel
+   res%e_elec  = eel + embd
    res%e_atom  = eat
    res%e_rep   = ep
    res%e_es    = ees

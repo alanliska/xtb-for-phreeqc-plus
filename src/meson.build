@@ -17,6 +17,7 @@
 
 subdir('api')
 subdir('coulomb')
+subdir('dipro')
 subdir('disp')
 subdir('docking')
 subdir('extern')
@@ -28,10 +29,12 @@ subdir('main')
 subdir('mctc')
 subdir('param')
 subdir('prog')
+subdir('ptb')
 subdir('solv')
 subdir('tblite')
 subdir('type')
 subdir('xtb')
+subdir('lbfgs_anc')
 
 srcs += files(
   'aespot.f90',
@@ -56,6 +59,7 @@ srcs += files(
   'define.f90',
   'detrotra.f90',
   'dipole.f90',
+  'dipro.F90',
   'drsp.f',
   'dtrafo.f90',
   'dynamic.f90',

@@ -192,6 +192,7 @@ subroutine write_set_opt(ictrl)
       case default;            write(ictrl,'("unknown")')
       case(p_engine_rf);       write(ictrl,'("rf")')
       case(p_engine_lbfgs);    write(ictrl,'("lbfgs")')
+      case(p_engine_pbc_lbfgs);    write(ictrl,'("pbc_lbfgs")')
       case(p_engine_inertial); write(ictrl,'("inertial")')
       end select
    end if
@@ -781,7 +782,7 @@ subroutine rdcontrol(fname,env,copy_file)
          case('write'    ); call rdblock(env,set_write,   line,id,copy,err,ncount)
          case('gfn'      ); call rdblock(env,set_gfn,     line,id,copy,err,ncount)
          case('scc'      ); call rdblock(env,set_scc,     line,id,copy,err,ncount)
-         case('oniom'    ); call rdblock(env,set_oniom,    line,id,copy,err,ncount)
+         case('oniom'    ); call rdblock(env,set_oniom,   line,id,copy,err,ncount)
          case('opt'      ); call rdblock(env,set_opt,     line,id,copy,err,ncount)
          case('hess'     ); call rdblock(env,set_hess,    line,id,copy,err,ncount)
          case('md'       ); call rdblock(env,set_md,      line,id,copy,err,ncount)
@@ -957,8 +958,12 @@ subroutine set_exttyp(typ)
       set%mode_extrun = p_ext_mopac
    case('ff')
       set%mode_extrun = p_ext_gfnff
+   case('mcff')
+      set%mode_extrun = p_ext_mcgfnff
    case('iff')
       set%mode_extrun = p_ext_iff
+   case('ptb')
+      set%mode_extrun = p_ext_ptb
    end select
    set1 = .false.
 
@@ -988,6 +993,29 @@ subroutine set_geopref(typ)
    set1 = .false.
 end subroutine set_geopref
 
+subroutine set_raman(env,val)
+   
+   implicit none 
+   character(len=*), parameter :: source = 'set_raman' 
+   type(TEnvironment), intent(inout) :: env
+   character(len=*), intent(in) :: val
+   real(wp) :: idum
+
+   logical, save :: set1 = .true.
+   logical, save :: set2 = .true.
+   
+   if (set1) then
+      if (getValue(env,val,idum)) set%ptbsetup%raman_temp = idum 
+      set1 =.false.
+   else if (set2) then
+      if (getValue(env,val,idum)) then
+         idum=10**7/idum
+         set%ptbsetup%raman_lambda = idum 
+         set2 =.false.
+      endif
+   endif
+   
+end subroutine set_raman
 subroutine set_runtyp(typ)
    implicit none
    character(len=*),intent(in) :: typ
@@ -1049,6 +1077,28 @@ subroutine set_runtyp(typ)
    set1 = .false.
 end subroutine set_runtyp
 
+subroutine set_elprop(typ)
+   implicit none
+   character(len=*),intent(in) :: typ
+
+   select case(typ)
+   case default ! do nothing !
+      call raise('E',typ//' is no valid runtyp (internal error)')
+   case('alpha')
+      set%elprop = p_elprop_alpha
+   case('polar')
+      set%elprop = p_elprop_alpha
+   case('raman')
+      set%elprop = p_elprop_alpha
+      call set_runtyp('hess')
+   case('ir')
+      set%elprop = p_elprop_dipole
+   case('dipole')
+      set%elprop = p_elprop_dipole
+   end select
+
+end subroutine set_elprop
+
 subroutine set_derived
    implicit none
    set%oniom_settings%derived = .true.
@@ -1057,6 +1107,7 @@ end subroutine set_derived
 subroutine set_fit
    implicit none
    set%fit = .true.
+   set%acc = 0.2_wp
 end subroutine set_fit
 
 subroutine set_cma
@@ -1089,6 +1140,7 @@ end subroutine set_cut
 
 
 !> charge initialization
+!> Priority: cml -> xcontrol -> .CHRG
 subroutine set_chrg(env,val)
 
    implicit none
@@ -1162,7 +1214,6 @@ end subroutine set_spin
 
 
 subroutine set_efield(env, val)
-   use xtb_gfnff_param, only : efield
    implicit none
    character(len=*), parameter :: source = 'set_efield'
    type(TEnvironment), intent(inout) :: env
@@ -1172,13 +1223,14 @@ subroutine set_efield(env, val)
    logical,save :: set1 = .true.
    if (set1) then
       if (getValue(env,val,idum)) then
-         efield = idum
+         set%efield = idum
       else
          call env%error('E-field could not be read from your argument', source)
       endif
    endif
    set1 = .false.
 end subroutine set_efield
+
 
 
 subroutine set_write(env,key,val)
@@ -1449,13 +1501,16 @@ end subroutine set_gfn
 
 !> set ONIOM functionality
 subroutine set_oniom(env,key,val)
+   
    implicit none
+   
    !> pointer to the error routine
    character(len=*), parameter :: source =  'set_oniom'
    
    !> calculation environment
    type(TEnvironment), intent(inout) :: env
    
+   !> parsed key
    character(len=*), intent(in) :: key
    
    !> key=val
@@ -1466,6 +1521,7 @@ subroutine set_oniom(env,key,val)
    logical, save :: set2 = .true.
    logical, save :: set3 = .true.
    logical, save :: set4 = .true.
+   logical, save :: set5 = .true.
    
    select case(key)
    case default
@@ -1485,6 +1541,11 @@ subroutine set_oniom(env,key,val)
    case('ignore topo')
       if (getValue(env,val,ldum).and.set4) set%oniom_settings%ignore_topo = .true.
       set4=.false.
+
+   case('outer')
+      if (getValue(env,val,ldum).and.set5) set%oniom_settings%outer = .true.
+      set5 = .false.
+   
    end select
 
 end subroutine set_oniom
@@ -1506,7 +1567,7 @@ subroutine set_scc(env,key,val)
    select case(key)
    case default ! do nothing
       call env%warning("the key '"//key//"' is not recognized by scc",source)
-   case('temp')
+   case('etemp','temp')
       if (getValue(env,val,ddum).and.set1) set%eTemp = ddum
       set1 = .false.
    case('broydamp')
@@ -1524,7 +1585,7 @@ subroutine set_scc(env,key,val)
          set%guess_charges = p_guess_multieq
       endif
       set3 = .false.
-   case('maxiterations')
+   case('iterations','maxiterations')
       if (getValue(env,val,idum).and.set4) then
          if (idum.le.0) then
             call env%warning('negative SCC-Iterations make no sense',source)
@@ -1649,6 +1710,7 @@ subroutine set_opt(env,key,val)
          case default; call env%warning("engine '"//val//"' is not implemented",source)
          case('rf','ancopt');      set%opt_engine = p_engine_rf
          case('lbfgs','l-ancopt'); set%opt_engine = p_engine_lbfgs
+         case('pbc_lbfgs');        set%opt_engine = p_engine_pbc_lbfgs
          case('inertial','fire');  set%opt_engine = p_engine_inertial
          end select
       end if
@@ -2009,6 +2071,8 @@ subroutine set_gbsa(env,key,val)
    logical,save :: set5 = .true.
    logical,save :: set6 = .true.
    logical,save :: set7 = .true.
+   logical,save :: set8 = .true.
+   logical,save :: set9 = .true.
    select case(key)
    case default ! do nothing
       call env%warning("the key '"//key//"' is not recognized by gbsa",source)
@@ -2062,6 +2126,15 @@ subroutine set_gbsa(env,key,val)
    case('cosmo')
       if (getValue(env,val,ldum).and.set7) set%solvInput%cosmo = ldum
       set7 = .false.
+   case('tmcosmo')
+      if (getValue(env,val,ldum).and.set8) then
+         set%solvInput%cosmo = ldum
+         set%solvInput%tmcosmo = .true.
+      end if
+      set8 = .false.
+   case('cpcmx')
+      if (set9) set%solvInput%cpxsolvent = val
+      set9 = .false.
    end select
 end subroutine set_gbsa
 

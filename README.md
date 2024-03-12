@@ -2,7 +2,7 @@
 
 ## Changes in this fork
 
-* all source files (including the build/_deps subfolders) containing function ieee - substituted by huge() function (due to Android compiler limitations)
+* all source files (including the build/_deps subfolders) containing function ieee - substituted by huge() function
 * added the stamp defining the release
 
 ## Compilation
@@ -18,15 +18,12 @@ $ rm CMakeCache.txt
 $ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DFETCHCONTENT_FULLY_DISCONNECTED=ON
 ```
 
-open link.txt files and if they contain -lpython3.9, substitute by path/to/libpython3.7m.a and add -pie -fPIC
+open link.txt files and (if necessary) replace as many links to shared libraries to static as possible, add -pie -fPIC
 
 ```bash
 $ make install
 ```
 
-
-
-####
 
 # Semiempirical Extended Tight-Binding Program Package
 
@@ -35,7 +32,7 @@ $ make install
 [![DOI](https://img.shields.io/badge/DOI-10.1002%2Fwcms.1493-blue)](https://doi.org/10.1002/wcms.1493)
 [![Github Downloads All Releases](https://img.shields.io/github/downloads/grimme-lab/xtb/total)](https://github.com/grimme-lab/xtb/releases)
 
-This is fork of the official repository of the `xtb` program package developed by the Grimme group in Bonn.
+This is the offical repository of the `xtb` program package developed by the Grimme group in Bonn.
 
 <div align="center">
 <img src="./assets/logo/xtb.svg" alt="Extended Tight Binding" width="220">
@@ -54,6 +51,10 @@ Bleeding edge releases (Linux only) of the latest source from this repository ar
 
 This projects supports two build systems, meson and CMake.
 A short guide on the usage of each is given here, follow the linked instructions for a more detailed information ([meson guide](./meson/README.adoc), [CMake guide](./cmake/README.adoc)).
+
+**Compilers**: 
+  1. ifort(<=2021.10.0), icc(<=2021.10.0)
+  2. gfortran(<=13.2.0), gcc(<=13.2.0) 
 
 
 ### Meson

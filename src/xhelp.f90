@@ -40,6 +40,10 @@ write(iunit,'(3x,a)') &
    "* S. Ehlert, M. Stahn, S. Spicher, S. Grimme, J. Chem. Theory Comput.,", &
    "  2021, 17, 4250-4261. DOI: 10.1021/acs.jctc.1c00471", &
    "",&
+   "for ddCOSMO and CPCM-X implicit solvation:",&
+   "* M. Stahn, S. Ehlert, S. Grimme, J. Phys. Chem. A,", &
+   "  2023, XX, XXXX-XXXX. DOI: 10.1021/acs.jpca.3c04382", &
+   "",&
    "for DFT-D4:",&
    "* E. Caldeweyher, C. Bannwarth and S. Grimme, J. Chem. Phys., 2017,",&
    "  147, 034112. DOI: 10.1063/1.4993215", &
@@ -67,10 +71,22 @@ write(iunit,'(3x,a)') &
    "* S. Spicher and S. Grimme, J. Chem. Theory Comput., 2021, 17, 1701-1714", &
    "  DOI: 10.1021/acs.jctc.0c01306", &
    "",&
+   "for ONIOM refer to:",&
+   "* C. Plett, A. Katbashev, S. Ehlert, S. Grimme, M. Bursch,",&
+   "  Phys. Chem. Chem. Phys., 2023, 25, 17860-17868. DOI: 10.1039/D3CP02178E",&
+   "",&
+   "for DIPRO refer to:",&
+   "* J. Kohn, N. Gildemeister, S. Grimme, D. Fazzi, A. Hansen,",&
+   "  J. Chem. Phys., 2023, just accepted.",&
+   "",&
+   "for PTB refer to:",&
+   "* S. Grimme, M. Mueller, A. Hansen, J. Chem. Phys., 2023, 158, 124111.",&
+   "  DOI: 10.1063/5.0137838",&
+   "",&
    "with help from (in alphabetical order)",&
    "P. Atkinson, C. Bannwarth, F. Bohle, G. Brandenburg, E. Caldeweyher", &
    "M. Checinski, S. Dohm, S. Ehlert, S. Ehrlich, I. Gerasimov, C. Hölzer", &
-   "A. Katbashev, J. Koopman, C. Lavigne, S. Lehtola, F. März, M. Müller,", &
+   "A. Katbashev, J. Kohn, J. Koopman, C. Lavigne, S. Lehtola, F. März, M. Müller,", &
    "F. Musil, H. Neugebauer, J. Pisarek, C. Plett, P. Pracht, F. Pultar,", &
    "J. Seibert, P. Shushkov, S. Spicher, M. Stahn, M. Steiner, T. Strunk,", &
    "J. Stückrath, T. Rose, and J. Unsleber", &
@@ -78,7 +94,7 @@ write(iunit,'(3x,a)') &
    "Special version for Android (aarch64, pie) ",&
    "linked with high-performance BLAS and LAPACK libraries ",&
    "compiled by A. Liska & V. Ruzickova",&
-   "on July 15, 2023.",&
+   "on March 12, 2024.",&
    ""
 end subroutine citation
 
@@ -110,6 +126,11 @@ subroutine help(iunit)
    "",&
    "--tblite,",&
    "    use tblite library as implementation for xTB",&
+   "",&
+   "--ptb,",&
+   "    performs single-point calculation with the density tight-binding method PTB.", &
+   "    Provides electronic structure and properties, such as, e.g., atomic charges, bond orders, and dipole moments,", & 
+   "    but does not provide any energy-related properties, such as, e.g., total energy, nuclear gradients, or vibrational frequencies.", &
    "",&
    "--spinpol,",&
    "    enables spin-polarization for xTB methods (tblite required)",&
@@ -156,6 +177,19 @@ subroutine help(iunit)
    "    The solvent input is not case-sensitive.", &
    "    The Gsolv reference state can be chosen as reference or bar1M (default).",&
    "",&
+   "--cosmo SOLVENT/EPSILON",&
+   "    domain decomposition conductor-like screening model (ddCOSMO),",&
+   "    available solvents are all solvents that are available for alpb.",&
+   "    Additionally, the dielectric constant can be set manually or an ideal conductor", &
+   "    can be chosen by setting epsilon to infinity.",&
+   "",&
+   "--tmcosmo SOLVENT/EPSILON",&
+   "    same as --cosmo, but uses TM convention for writing the .cosmo files.",&
+   "",&
+   "--cpcmx SOLVENT",&
+   "    extended conduction-like polarizable continuum solvation model (CPCM-X),",&
+   "    available solvents are all solvents included in the Minnesota Solvation Database.",&
+   "",&
    "--cma",&
    "    shifts molecule to center of mass and transforms cartesian coordinates into the",&
    "    coordinate system of the principle axis (not affected by ‘isotopes’-file).",&
@@ -168,6 +202,14 @@ subroutine help(iunit)
    "",&
    "--dipole",&
    "    requests dipole printout",&
+   "",&
+   "--raman", &
+   "    requests Raman spectrum calculation via combination of GFN2-xTB and PTB",&
+   "    using the temperature 'REAL' (default 298.15 K) and the wavelength of the",& 
+   "    incident laser which must be given in nm 'REAL' (default 514 nm).",&
+   "",&
+   "--alpha",&
+   "    requests the extension of electrical properties to static molecular dipole polarizabilities. ",&
    "",&
    "--wbo",&
    "    requests Wiberg bond order printout",&
@@ -429,6 +471,9 @@ subroutine help_legacy
 
    write(id,'(3x,''    --omd         '','// &
    &          'x,''optimize and do MD'')')
+
+   write(id,'(3x,''    --dipro <thr> '','// &
+   &          'x,''calculate dipro coupling integrals'')')
 
    write(id,'(3x,''    --siman       '','// &
    &          'x,''conformational search'')')

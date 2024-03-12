@@ -401,7 +401,7 @@ subroutine loadInternalParam(self, env, solvent, level)
             self%paramFile = "internal GFN-xTB/COSMO"
             param = gfn_cosmo_inf
 !            param%epsv = ieee_value(param%epsv,ieee_positive_inf)
-	    param%epsv = huge(param%epsv)
+            param%epsv = huge(param%epsv)
          else
             self%paramFile = "internal GFN-xTB/COSMO"
             param = gfn_cosmo
@@ -694,6 +694,10 @@ subroutine newSolvationModel(self, env, model, num)
       allocate(cosmo)
       call init_(cosmo, env, num, self%dielectricConst, self%nAng, self%bornScale, &
          & self%vdwRad, self%surfaceTension, self%probeRad, srcut)
+      if (self%tmcosmo) then
+         cosmo%tmcosmo=.true.
+         cosmo%wrvolume=.true.
+      end if
       call move_alloc(cosmo, model)
    else
       allocate(born)

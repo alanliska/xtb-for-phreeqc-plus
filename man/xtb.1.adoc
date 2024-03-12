@@ -78,8 +78,13 @@ OPTIONS
 *--gfnff, --gff* ::
     specify parametrisation of GFN-FF
 
-*--tblite*::
+*--tblite* ::
     use tblite library as implementation for xTB
+
+*--ptb* ::
+    performs single-point calculation with the density tight-binding method PTB.
+    Provides electronic structure and properties, such as, e.g., atomic charges, bond orders, and dipole moments,
+    but does not provide any energy-related properties, such as, e.g., total energy, nuclear gradients, or vibrational frequencies.
 
 *--spinpol*::
     enables spin-polarization for xTB methods (tblite required)
@@ -91,8 +96,8 @@ OPTIONS
     The inner region is given as comma-separated indices directly in the commandline
     or in a file with each index on a separate line.
 
-*--etemp* 'REAL'::
-    electronic temperature (default = 300K)
+*--etemp, --temp* 'REAL'::
+    electronic temperature for SCC (default = 300K)
 
 *--esp* ::
     calculate electrostatic potential on VdW-grid
@@ -102,6 +107,9 @@ OPTIONS
 
 *-a, --acc* 'REAL'::
     accuracy for SCC calculation, lower is better (default = 1.0)
+
+*--iterations, --maxiterations* 'INT'::
+    maximum number of SCC iterations per single point calculation (default = 250)
 
 *--vparam* 'FILE'::
     Parameter file for xTB calculation
@@ -134,6 +142,14 @@ OPTIONS
 *--molden*::
     requests printout of molden file
 
+*--alpha* ::
+    requests the extension of electrical properties to static molecular dipole polarizabilities
+
+*--raman* ::
+    requests Raman spectrum calculation via combination of GFN2-xTB and PTB
+    using the temperature 'REAL' (default 298.15 K) and the wavelength of 
+    the incident laser which must be given in nm 'REAL' (default 514 nm)
+    
 *--dipole*::
     requests dipole printout
 
@@ -222,6 +238,10 @@ NOTE: You can only select *one* runtyp, only the first runtyp will be used
 *--modef* 'INT'::
     modefollowing algorithm. 'INT' specifies the mode that should be
     used for the modefollowing.
+
+*--dipro* ['REAL']:: 
+    the dimer projection method for the calculation of electronic coupling integrals between two fragments.
+    'REAL' sets the threshold for nearly degenerate orbitals to still be considered (default = 0.1 eV).
     
 
 GENERAL
@@ -261,7 +281,7 @@ GENERAL
      clutter the screen less (not supported in every unit)
 
 *--ceasefiles*::
-     reduce the amount of output and files written
+     reduce the amount of output and files written (e.g. xtbtopo.mol)
 
 *--strict*::
      turns all warnings into hard errors
@@ -337,6 +357,9 @@ OUTPUT
 
 *hessian*::
    contains the (not mass weighted) cartesian Hessian, *--namespace* compatible.
+
+*xtbtopo.mol*::
+   topology information written in molfile format.
 
 *xtbopt.xyz*, *xtbopt.coord*::
    optimized geometry in the same format as the input geometry.

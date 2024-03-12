@@ -17,6 +17,7 @@
 
 add_subdirectory("api")
 add_subdirectory("coulomb")
+add_subdirectory("dipro")
 add_subdirectory("disp")
 add_subdirectory("docking")
 add_subdirectory("extern")
@@ -28,10 +29,12 @@ add_subdirectory("main")
 add_subdirectory("mctc")
 add_subdirectory("param")
 add_subdirectory("prog")
+add_subdirectory("ptb")
 add_subdirectory("solv")
 add_subdirectory("tblite")
 add_subdirectory("type")
 add_subdirectory("xtb")
+add_subdirectory("lbfgs_anc")
 
 set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -58,6 +61,7 @@ list(APPEND srcs
   "${dir}/define.f90"
   "${dir}/detrotra.f90"
   "${dir}/dipole.f90"
+  "${dir}/dipro.F90"
   "${dir}/drsp.f"
   "${dir}/dtrafo.f90"
   "${dir}/dynamic.f90"

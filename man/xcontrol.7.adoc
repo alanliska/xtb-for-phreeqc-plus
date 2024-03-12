@@ -336,10 +336,14 @@ $oniom
 *derived k*='bool'::
    to calculate prefactor *k* and create jacobian dynamically (see more )
 
+*ignore topo*='bool'::
+   to bypass topology check when breaking bonds
+
+*outer*='bool'::
+   to saturate outer region  
+
 *silent*='bool'::
    to hide the execution runs of external software 
-
-
 
 $opt
 ~~~~
@@ -382,18 +386,27 @@ $opt
 
 *kstretch*='real'::
    stretch force constant in model hessian
+
 *kbend*='real'::
    bend force constant in model hessian
+
 *ktorsion*='real'::
    torsion force constant in model hessian
+
 *koutofp*='real'::
    out-of-plain force constant to model hessian
+
 *kvdw*='real'::
    additional vdW-contribution (lindh|swart only)
+
 *kes*='real'::
    electrostatic contribution to model hessian by EEQ model
+
 *rcut*='real'::
    distance cutoff for bonds in model hessian
+
+*exact rf*='bool'::
+   use better solver during the rational function optimization
 
 $path (6.1 only)
 ~~~~~~~~~~~~~~~~
@@ -435,7 +448,7 @@ NOTE: the scan parser will always terminate in error if the instruction could
 
 $scc
 ~~~~
-*temp*='real'::
+*temp, etemp*='real'::
     electronic temperature for the Fermi smearing
 
 *broydamp*='real'::
@@ -444,7 +457,7 @@ $scc
 *guess*=gasteiger|goedecker|sad::
     different possible guess charges for GFN2-xTB SCC calculation
 
-*maxiteration*='int'::
+*iterations, maxiterations*='int'::
     adjusts the number of SCC iterations in the first/last SCC calculation
 
 $split
@@ -530,6 +543,12 @@ $wall
 *ellipsoid*: auto|'real',auto|'real',auto|'real',all|'list',...::
     set up a ellipsoid wall potential for all or the atoms in 'list'
     with the radii 'real' or an automatical determined sphere radius
+    If 'auto' is chosen for axes, sphere potential is applied, no ellipsoid!!!
+
+*sandwich*: auto|'real',all|'list',...::
+   set up a sandwich wall potential for all or the atoms in 'list'
+   with the radius 'real' or an automatical determined sandwich radius in Bohr
+   Only potential=logfermi ist available. diameter=2*radius+2*4A safety buffer
 
 
 $write

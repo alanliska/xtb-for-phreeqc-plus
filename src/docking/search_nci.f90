@@ -52,6 +52,9 @@ module xtb_docking_search_nci
    use xtb_scc_core, only: iniqshell
    use xtb_eeq, only: goedecker_chrgeq
    use xtb_basis, only: newBasisset
+   use xtb_gfnff_neighbor, only: TNeigh
+   use xtb_io_writer, only : writeMolecule
+   use xtb_mctc_filetypes, only : generateFileName
    implicit none
 
    private
@@ -141,6 +144,7 @@ contains
       class(TCalculator), allocatable :: calc
       type(TGFFCalculator) :: gff_calc
       type(TGFFTopology) :: topo_backup, topo_xTB
+      type(TNeigh) :: neigh_backup
       type(TTopology) :: bonds 
       !> Parameterfile
       character(len=:), allocatable :: pfile
@@ -172,6 +176,8 @@ contains
       real(wp) :: tmp_e
       !> Minimumposition
       integer :: minpos
+      !> For outprint
+      character(len=:),allocatable :: extension, fin_name
 
       !> Parameter
       real(wp), parameter :: pi2 = 2*3.14159265358979_wp
@@ -239,6 +245,7 @@ contains
       select type (calc)
       type is (TGFFCalculator)
          topo_backup = calc%topo !topo is from molA and molB that are far away
+         neigh_backup = calc%neigh
       end select
       pr = .false.
       initial_sp = .true.
@@ -536,8 +543,8 @@ contains
             type is (TGFFCalculator)
                call restart_gff(env, comb, calc)
                !Keeping Fragments and charges
-               calc%topo%nbond = topo_backup%nbond
-               calc%topo%nb = topo_backup%nb
+               calc%neigh%nbond = neigh_backup%nbond
+               calc%neigh%nb = neigh_backup%nb
                calc%topo%qfrag = topo_backup%qfrag
                calc%topo%qa = topo_backup%qa
                calc%topo%fraglist = topo_backup%fraglist
@@ -876,16 +883,18 @@ contains
          do j = 1, molA%n
             comb%xyz(1:3, j) = molA%xyz(1:3, j) !comb overwritten with A, as it is changed upon geo_opt
          end do
+
          counter = 0
          do j = molA%n + 1, molA%n + molB%n
             counter = counter + 1
             comb%xyz(1:3, j) = xyz_tmp(1:3, counter) !combined molA and shifted molB
          end do
+
          select type (calc)
          type is (TGFFCalculator)
             call restart_gff(env, comb, calc)
-            calc%topo%nbond = topo_backup%nbond
-            calc%topo%nb = topo_backup%nb
+            calc%neigh%nbond = neigh_backup%nbond
+            calc%neigh%nb = neigh_backup%nb
             calc%topo%qfrag = topo_backup%qfrag
             calc%topo%qa = topo_backup%qa
             calc%topo%fraglist = topo_backup%fraglist
@@ -946,14 +955,29 @@ contains
 
       call remove_file(iopt)
 
-      call open_file(ifinal, 'best.xyz', 'w')
-      write (ifinal, '(i0)') comb%n
-      write (ifinal, '(f20.14)') final_e(1)
-      do j = 1, comb%n
-         write (ifinal, '(a4,2x,3f20.14)') comb%sym(j), xyz_opt(1, j, 1)*autoang, &
-         &                                 xyz_opt(2, j, 1)*autoang, xyz_opt(3, j, 1)*autoang
-      end do
+      ! Write best structure in format of the largest input molecule
+      comb%xyz(:,:) = xyz_opt(:,:,1)
+      if(molA%n >= molB%n) then
+         comb%ftype=molA%ftype
+      else
+         comb%ftype=molB%ftype
+      end if
+      call generateFileName(fin_name, 'best', '', comb%ftype)
+      call open_file(ifinal, fin_name, 'w')
+      call writeMolecule(comb, ifinal, energy=final_e(1))
+      !If not xyz then best.xyz is written to not have api break
+      if(comb%ftype /= 1)then
+         call open_file(ifinal, 'best.xyz', 'w')
+         write (ifinal, '(i0)') comb%n
+         write (ifinal, '(f20.14)') final_e(1)
+         do j = 1, comb%n
+            write (ifinal, '(a4,2x,3f20.14)') comb%sym(j), xyz_opt(1, j, 1)*autoang, &
+            &                                 xyz_opt(2, j, 1)*autoang, xyz_opt(3, j, 1)*autoang
+         end do
+      end if
       call close_file(ifinal)
+
+
       call delete_file(set%opt_logfile)
 
       !> Printout Interaction Energy
@@ -1036,14 +1060,12 @@ contains
       call remove_file(itopo)
       call open_file(itopo, 'charges', 'r')
       call remove_file(itopo)
-      call open_file(itopo, 'gfnff_adjacency', 'r')
-      call remove_file(itopo)
       call calc%topo%zero
       calc%update = .true.
       call gfnff_param_dealloc(calc%topo)
       call newD3Model(calc%topo%dispm, mol%n, mol%at)
       call gfnff_set_param(mol%n, calc%gen, calc%param)
-      if (.not. allocated(calc%topo%nb)) allocate (calc%topo%nb(20, mol%n), source=0)
+      if (.not. allocated(calc%neigh%nb)) allocate (calc%neigh%nb(calc%neigh%numnb, mol%n, calc%neigh%numctr), source=0)
       if (.not.allocated(calc%topo%qfrag)) &
               & allocate( calc%topo%qfrag(mol%n), source = 0.0d0 )
       if (.not.allocated(calc%topo%fraglist)) &
@@ -1051,7 +1073,7 @@ contains
       calc%topo%qfrag(1) = set%ichrg
       calc%topo%qfrag(2:mol%n) = 0.0_wp
       call gfnff_ini(env, .false., ini, mol, calc%gen,&
-           &         calc%param, calc%topo, calc%accuracy)
+           &         calc%param, calc%topo, calc%neigh, set%efield, calc%accuracy)
 
    end subroutine restart_gff
 

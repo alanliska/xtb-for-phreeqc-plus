@@ -135,7 +135,9 @@ module xtb_docking_param
    integer, parameter :: p_atom_pot = 2
    !> Attractive atom-centered potential
    integer, parameter :: p_atom_att = 3 
-   !Wall pot for directed docking
+   !> Attractive atom-centered potential for QCG mode
+   integer, parameter :: p_atom_qcg = 4 
+   !> Wall pot for directed docking (Not used)
    integer, parameter :: p_wall_pot = 1 
    integer :: place_wall_pot
    !QCG mode (special treatment of wall potentials)

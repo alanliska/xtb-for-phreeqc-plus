@@ -36,6 +36,7 @@ module xtb_type_molecule
    use xtb_mctc_accuracy, only : wp
    use xtb_mctc_boundaryconditions, only : boundaryCondition
    use xtb_mctc_symbols, only : toNumber, toSymbol, symbolLength, getIdentity
+   use xtb_type_wsc
    use xtb_type_topology
    use xtb_type_fragments
    use xtb_type_buffer
@@ -110,6 +111,9 @@ module xtb_type_molecule
 
       !> Volume of unit cell
       real(wp) :: volume = 0.0_wp
+
+      !> Wigner--Seitz cell
+      type(tb_wsc) :: wsc
 
       !> File type of the input
       integer  :: ftype = 0
@@ -202,6 +206,14 @@ end subroutine copyMolecule
 subroutine initMolecule &
      & (mol, at, sym, xyz, chrg, uhf, lattice, pbc)
 
+   interface
+      subroutine generate_wsc(mol,wsc)
+         import :: TMolecule, tb_wsc
+         type(TMolecule), intent(inout) :: mol
+         type(tb_wsc),    intent(inout) :: wsc
+      end subroutine generate_wsc
+   end interface
+
    type(TMolecule), intent(out) :: mol
    integer, intent(in) :: at(:)
    character(len=*), intent(in) :: sym(:)
@@ -218,11 +230,10 @@ subroutine initMolecule &
    nAt = min(size(at, dim=1), size(xyz, dim=2), size(sym, dim=1))
 
    call mol%allocate(nAt)
-
+   
+   mol%lattice = 0.0_wp
    if (present(lattice)) then
-      mol%lattice = lattice
-   else
-      mol%lattice = 0.0_wp
+      if (size(lattice).ne.0) mol%lattice = lattice
    end if
 
    if (present(pbc)) then
@@ -269,6 +280,8 @@ subroutine initMolecule &
    call mol%set_atomic_masses
 
    call mol%update
+
+   call generate_wsc(mol, mol%wsc)
 
 end subroutine initMolecule
 

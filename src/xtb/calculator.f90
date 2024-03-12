@@ -20,6 +20,7 @@ module xtb_xtb_calculator
    use xtb_mctc_accuracy, only : wp
    use xtb_solv_gbsa, only : TBorn
    use xtb_solv_model, only : info, newSolvationModel, newBornModel
+   use xtb_solv_cpx, only: TCpcmx
    use xtb_type_basisset, only : TBasisset
    use xtb_type_calculator, only : TCalculator
    use xtb_type_data
@@ -140,8 +141,8 @@ subroutine newXTBCalculator(env, mol, calc, fname, method, accuracy)
       calc%accuracy = 1.0_wp
    end if
 
-   calc%etemp = 300.0_wp
-   calc%maxiter = 250
+   calc%etemp = set%etemp
+   calc%maxiter = set%maxscciter
 
    !> Obtain the parameter file
    allocate(calc%xtbData)
@@ -297,13 +298,11 @@ subroutine singlepoint(self, env, mol, chk, printlevel, restart, &
 
    ! ------------------------------------------------------------------------
    !  fixing of certain atoms
-   !  print*,abs(efix/etot)
    energy = energy + efix
    results%e_total = energy
    results%gnorm = norm2(gradient)
    if (fixset%n.gt.0) then
       do i=1, fixset%n
-         !print*,i,fixset%atoms(i)
          gradient(1:3,fixset%atoms(i))=0
       enddo
    endif
