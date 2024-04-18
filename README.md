@@ -2,28 +2,31 @@
 
 ## Changes in this fork
 
-* all source files (including the build/_deps subfolders) containing function ieee - substituted by huge() function
 * added the stamp defining the release
 
 ## Compilation
 
 ```bash
-$ unzip _deps.zip
 $ mkdir build
-$ mv _deps ./build/
 $ cd build
-$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/and/static_python_libs
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/
 $ export PATH=$PATH:/path/to/include
-$ rm CMakeCache.txt
+$ export CFLAGS="-fPIC -pie -static"
+$ export CXXFLAGS="-fPIC -pie -static"
+$ export FFLAGS="-fPIC -pie -static"
+$ export LDFLAGS="-fPIC -pie -static"
+$ export CC=/path/to/your/cross-compiler
+$ export CXX=/path/to/your/cross-compiler
+$ export FC=/path/to/your/cross-compiler
 $ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DFETCHCONTENT_FULLY_DISCONNECTED=ON
 ```
 
-open link.txt files and (if necessary) replace as many links to shared libraries to static as possible, add -pie -fPIC
+open link.txt files and if they contain libblas.a in front of liblapack.a, change their order; for shared objects (*.so) delete -static manually to avoid linking error
 
 ```bash
 $ make install
 ```
-
+# ORIGINAL DESCRIPTION:
 
 # Semiempirical Extended Tight-Binding Program Package
 

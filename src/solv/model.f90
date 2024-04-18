@@ -32,7 +32,7 @@ module xtb_solv_model
    use xtb_solv_state, only : solutionState, getStateShift
    use xtb_type_environment, only : TEnvironment
    use xtb_type_solvation, only : TSolvation
-!   use ieee_arithmetic, only : ieee_value,ieee_positive_inf
+   use ieee_arithmetic, only : ieee_value,ieee_positive_inf
    implicit none
    private
 
@@ -400,8 +400,7 @@ subroutine loadInternalParam(self, env, solvent, level)
          else if ((solvent .eq. "inf") .or. (solvent .eq. "infinity")) then
             self%paramFile = "internal GFN-xTB/COSMO"
             param = gfn_cosmo_inf
-!            param%epsv = ieee_value(param%epsv,ieee_positive_inf)
-            param%epsv = huge(param%epsv)
+            param%epsv = ieee_value(param%epsv,ieee_positive_inf)
          else
             self%paramFile = "internal GFN-xTB/COSMO"
             param = gfn_cosmo

@@ -91,10 +91,11 @@ write(iunit,'(3x,a)') &
    "J. Seibert, P. Shushkov, S. Spicher, M. Stahn, M. Steiner, T. Strunk,", &
    "J. Stückrath, T. Rose, and J. Unsleber", &
    "",&
-   "Special version for Android (aarch64, pie) ",&
-   "linked with high-performance BLAS and LAPACK libraries ",&
+   "Special version for Linux (Debian, aarch64, pie, static) ",&
+   "linked with high-performance BLAS and LAPACK libraries (for Android)",&
+   "tailored to run on aarch64 powered Android devices",&
    "compiled by A. Liska & V. Ruzickova",&
-   "on March 12, 2024.",&
+   "on April 13, 2024.",&
    ""
 end subroutine citation
 
@@ -114,6 +115,9 @@ subroutine help(iunit)
    "",&
    "-c, --chrg INT",&
    "    specify molecular charge as INT, overrides .CHRG file and xcontrol option",&
+   "",&
+   "--ceh",&
+   "    calculate CEH (Charge-Extended Hückel model) charges and write them to ceh.charges file",&
    "",&
    "-u, --uhf INT",&
    "    specify number of unpaired electrons as INT, overrides .UHF file and xcontrol option",&
