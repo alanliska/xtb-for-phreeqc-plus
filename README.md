@@ -11,14 +11,14 @@ $ mkdir build
 $ cd build
 $ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/
 $ export PATH=$PATH:/path/to/include
-$ export CFLAGS="-fPIC -pie -static"
-$ export CXXFLAGS="-fPIC -pie -static"
-$ export FFLAGS="-fPIC -pie -static"
+$ export CFLAGS="-fPIC -pie"
+$ export CXXFLAGS="-fPIC -pie"
+$ export FFLAGS="-fPIC -pie"
 $ export LDFLAGS="-fPIC -pie -static"
 $ export CC=/path/to/your/cross-compiler
 $ export CXX=/path/to/your/cross-compiler
 $ export FC=/path/to/your/cross-compiler
-$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DFETCHCONTENT_FULLY_DISCONNECTED=ON
+$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE
 ```
 
 open link.txt files and if they contain libblas.a in front of liblapack.a, change their order; for shared objects (*.so) delete -static manually to avoid linking error
