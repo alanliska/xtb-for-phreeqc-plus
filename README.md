@@ -4,7 +4,7 @@
 
 * added the stamp defining the release
 
-## Compilation
+## Compilation - serial version
 
 ```bash
 $ mkdir build
@@ -26,6 +26,30 @@ open link.txt files and if they contain libblas.a in front of liblapack.a, chang
 ```bash
 $ make install
 ```
+
+## Compilation - parallel version
+
+```bash
+$ mkdir build
+$ cd build
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/libblas.a/and/liblapack.a/
+$ export PATH=$PATH:/path/to/include
+$ export CFLAGS="-fPIC -pie"
+$ export CXXFLAGS="-fPIC -pie"
+$ export FFLAGS="-fPIC -pie"
+$ export LDFLAGS="-fPIC -pie -static"
+$ export CC=/path/to/your/cross-compiler
+$ export CXX=/path/to/your/cross-compiler
+$ export FC=/path/to/your/cross-compiler
+$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=TRUE
+```
+
+open link.txt files and if they contain libblas.a in front of liblapack.a, change their order; for shared objects (*.so) delete -static manually to avoid linking error ; substitute /path/libgomp.so for -lgomp and /path/libdl.so for -ldl
+
+```bash
+$ make install
+```
+
 # ORIGINAL DESCRIPTION:
 
 # Semiempirical Extended Tight-Binding Program Package
