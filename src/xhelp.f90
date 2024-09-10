@@ -91,10 +91,10 @@ write(iunit,'(3x,a)') &
    "J. Seibert, P. Shushkov, S. Spicher, M. Stahn, M. Steiner, T. Strunk,", &
    "J. Stückrath, T. Rose, and J. Unsleber", &
    "",&
-   "Special version for Android (x86_64, pie) ",&
+   "Parallel (OpenMP) version for Android (arm, pie) ",&
    "linked with high-performance BLAS and LAPACK libraries",&
    "compiled by A. Liska & V. Ruzickova",&
-   "on June 20, 2024.",&
+   "on September 10, 2024.",&
    ""
 end subroutine citation
 
