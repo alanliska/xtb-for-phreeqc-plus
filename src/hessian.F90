@@ -18,14 +18,14 @@
 module xtb_hessian
    use xtb_mctc_accuracy, only : wp
    use xtb_freq_io, only : rdhess, wrhess, writeHessianOut, &
-      & write_tm_vibspectrum, g98fake, g98fake2
+      & write_tm_vibspectrum, g98fake, g98fake2, rddipd
    use xtb_freq_project, only : trproj
    implicit none
    private
 
    public :: numhess
    public :: trproj, rdhess, g98fake2, distort, write_tm_vibspectrum
-
+   public :: rescale_freq
 contains
 
 subroutine numhess( &
@@ -87,9 +87,10 @@ subroutine numhess( &
    real(wp) :: trpol(3),sl(3,3)
    integer  :: n3,i,j,k,ic,jc,ia,ja,ii,jj,info,lwork,a,b,ri,rj
    integer  :: nread,kend,lowmode
-   integer  :: nonfrozh,izero(6)
+   integer  :: nonfrozh
+   integer  :: fixmode
    integer, allocatable :: nb(:,:)
-   integer, allocatable :: indx(:),molvec(:)
+   integer, allocatable :: indx(:),molvec(:),izero(:)
    real(wp),allocatable :: bond(:,:)
 
 !$ integer  :: nproc
@@ -102,7 +103,6 @@ subroutine numhess( &
    real(wp),allocatable :: fc_tb(:)
    real(wp),allocatable :: fc_bias(:)
    real(wp),allocatable :: v(:)
-   real(wp),allocatable :: fc_tmp(:)
    real(wp),allocatable :: freq_scal(:)
    real(wp),allocatable :: aux (:)
    real(wp),allocatable :: isqm(:)
@@ -110,7 +110,7 @@ subroutine numhess( &
    real(wp),allocatable :: xyzsave(:,:)
    real(wp),allocatable :: pold(:)
    real(wp),allocatable :: dipd(:,:), dalphadr(:,:), dalphadq(:,:)
-   real(wp),allocatable :: amass(:)
+   real(wp),allocatable :: amass_au(:), amass_amu(:)
    real(wp) :: asq, gamsq
 
    type(TMolecule) :: tmol
@@ -127,9 +127,9 @@ subroutine numhess( &
    res%n3true = n3-3*freezeset%n
 
    allocate(hss(n3*(n3+1)/2),hsb(n3*(n3+1)/2),h(n3,n3),htb(n3,n3),hbias(n3,n3), &
-      & gl(3,mol%n),isqm(n3),xyzsave(3,mol%n),dipd(3,n3), &
+      & gl(3,mol%n),isqm(n3),xyzsave(3,mol%n),dipd(3,n3), amass_amu(n3), &
       & pold(n3),nb(20,mol%n),indx(mol%n),molvec(mol%n),bond(mol%n,mol%n), &
-      & v(n3),fc_tmp(n3),freq_scal(n3),fc_tb(n3),fc_bias(n3),amass(n3), h_dummy(n3,n3))
+      & freq_scal(n3),fc_tb(n3),fc_bias(n3),amass_au(n3), h_dummy(n3,n3), izero(n3))
 
    if (set%elprop == p_elprop_alpha) then
       allocate(dalphadr(6,n3), source = 0.0_wp)
@@ -191,18 +191,20 @@ subroutine numhess( &
       ! the real ones
       nonfrozh=mol%n-freezeset%n
       do a = 1,mol%n
-         res%freq(a)=float(a)
+         res%freq(3*(a-1)+1:3*(a-1)+3)=float(a)
       enddo
       do a=1,freezeset%n
-         res%freq(freezeset%atoms(a))=freezeset%atoms(a)*100000_wp
+         k = freezeset%atoms(a)
+         res%freq(3*(k-1)+1:3*(k-1)+3)=k*100000.0_wp
       enddo
-      call sortind(mol%n,res%freq)
+      call sortind(3*mol%n,res%freq)
       do a=1,nonfrozh
-         indx(a)=idint(res%freq(a))
+         indx(a)=int(res%freq(3*a))
       enddo
       do a=nonfrozh+1,mol%n
-         indx(a)=idint(res%freq(a)/100000_wp)
+         indx(a)=int(res%freq(3*a)/100000.0_wp)
       enddo
+      res%freq(:) = 0.0_wp
       write(*,'(''atoms frozen in Hessian calc.:'',10i4)') &
          & indx(nonfrozh+1:mol%n)
 
@@ -263,8 +265,8 @@ subroutine numhess( &
          ia = indx(a)
          do ic = 1, 3
             ii = (ia-1)*3+ic
-            isqm(ii)=1.0_wp/sqrt(atmass(ia))
-            amass(ii)=isqm(ii)/sqrt(amutoau)
+            amass_amu(ii)=1.0_wp/sqrt(atmass(ia))
+            amass_au(ii)=amass_amu(ii)/sqrt(amutoau)
          enddo
       enddo
       do a = 1, nonfrozh
@@ -312,8 +314,8 @@ subroutine numhess( &
       do ia = 1, mol%n
          do ic = 1, 3
             ii = (ia-1)*3+ic
-            isqm(ii)=1.0_wp/sqrt(atmass(ia))
-            amass(ii)=isqm(ii)/sqrt(amutoau)
+            amass_amu(ii)=1.0_wp/sqrt(atmass(ia))
+            amass_au(ii)=amass_amu(ii)/sqrt(amutoau)
         enddo
       enddo
    endif
@@ -344,23 +346,33 @@ subroutine numhess( &
    end if
    ! project
    if(.not.res%linear)then ! projection does not work for linear mol.
+      fixmode = 0 ! no fixing
+      if (fixset%n > 0) fixmode = -1 ! fixing
       if (set%runtyp.eq.p_run_bhess) then
-         call trproj(mol%n,n3,mol%xyz,hsb,.false.,0,res%freq,1) ! freq is dummy
+         call trproj(mol%n,n3,mol%xyz,hsb,.false.,fixmode,res%freq,1) ! freq is dummy
       end if
-      call trproj(mol%n,n3,mol%xyz,hss,.false.,0,res%freq,1) ! freq is dummy
+      call trproj(mol%n,n3,mol%xyz,hss,.false.,fixmode,res%freq,1) ! freq is dummy
    endif
    ! non mass weigthed Hessian in hss
    hname = 'hessian'
    write(env%unit,'(a)')
-   write(env%unit,'("writing file <",a,">.")') hname
+   write(env%unit,'("writing file <",a,">, containing the non-mass-weighted Hessian matrix in atomic units (Eₕ/Bohr²).")') hname
    call wrhess(n3,hss,hname)
+
+   ! non mass weigthed biased Hessian in hsb
+   if (set%runtyp .eq. p_run_bhess) then
+      hname = 'hessian_sph'
+      write (env%unit, '(a)')
+      write (env%unit, '("writing file <",a,">.")') hname
+      call wrhess(n3, hsb, hname)
+   end if
 
    ! include masses
    k=0
    do i=1,n3
       do j=1,i
          k=k+1
-         res%hess(j,i)=hss(k)*isqm(i)*isqm(j)*scalh
+         res%hess(j,i)=hss(k)*amass_au(i)*amass_au(j)*scalh
          res%hess(i,j)=res%hess(j,i)
       enddo
    enddo
@@ -370,7 +382,7 @@ subroutine numhess( &
       do i=1,n3
          do j=1,i
             k=k+1
-            hbias(j,i)=hsb(k)*isqm(i)*isqm(j)*scalh
+            hbias(j,i)=hsb(k)*amass_au(i)*amass_au(j)*scalh
             hbias(i,j)=hbias(j,i)
          enddo
       enddo
@@ -386,26 +398,11 @@ subroutine numhess( &
       return
    end if
 
-   ! calculate fc_tb and fc_bias
-   alp1=1.27_wp
-   alp2=1.5d-4
    if (set%runtyp.eq.p_run_bhess) then
-      do j=1,n3
-         v(1:n3) = res%hess(1:n3,j) ! modes
-         call mctc_gemv(htb,v,fc_tmp)
-         fc_tb(j) = mctc_dot(v,fc_tmp)
-         call mctc_gemv(hbias,v,fc_tmp)
-         fc_bias(j) = mctc_dot(v,fc_tmp)
-         if (abs(res%freq(j)).gt.1.0d-6) then
-            freq_scal(j) = sqrt( (fc_tb(j)+alp2) / ( (fc_tb(j)+alp2) +  alp1*fc_bias(j) ) )
-            if (fc_tb(j).lt.0.and.fc_bias(j).ne.0) then
-               freq_scal(j) = -sqrt( (abs(fc_tb(j))+alp2) / ( (abs(fc_tb(j))+alp2) + alp1*fc_bias(j) ) )
-            end if
-         else
-            freq_scal(j) = 1.0_wp
-         end if
-      end do
-   end if
+      call rescale_freq(n3,htb,res%hess,hbias,res%freq,fc_tb,fc_bias,freq_scal)
+   else
+      freq_scal(1:n3) = 1.0_wp
+   end if 
 
    write(env%unit,'(a)')
    if(res%linear)then
@@ -416,7 +413,7 @@ subroutine numhess( &
    k=0
    do i=1,n3
       ! Eigenvalues in atomic units, convert to wavenumbers
-      res%freq(i)=autorcm*sign(sqrt(abs(res%freq(i))),res%freq(i))/sqrt(amutoau)
+      res%freq(i)=autorcm*sign(sqrt(abs(res%freq(i))),res%freq(i))
       if(abs(res%freq(i)).lt.0.01_wp) then
          k=k+1
          izero(k)=i
@@ -441,18 +438,32 @@ subroutine numhess( &
 
    ! sort such that rot/trans are modes 1:6, H/isqm are scratch
    if (mol%n > 1) then
-      kend=6
-      if(res%linear)then
-         kend=5
-         do i=1,kend
-            izero(i)=i
+      h = 0.0_wp
+      isqm = 0.0_wp
+      kend=0
+      if (freezeset%n == 0) then
+         kend=6
+         if(res%linear)then
+            kend=5
+            do i=1,kend
+               izero(i)=i
+            enddo
+            res%freq(1:kend)=0
+         endif
+         do k=1,kend
+            h(1:n3,k)=res%hess(1:n3,izero(k))
+            isqm(  k)=res%freq(izero(k))
          enddo
-         res%freq(1:5)=0
+      else if (freezeset%n <= 2) then
+         ! for systems with one fixed atom, there should be 2 and 3 degrees of freedom for linear and non-linear systems, respectively
+         ! for systems with two fixed atoms, there should be 0 and 1 degrees of freedom for linear and non-linear systems, respectively
+         ! for linear systems with more than two fixed atoms, there should be 0 degrees of freedom
+         ! for non-linear systems unless one fixes three atoms defines plane, 1 degree of freedom will exist, otherwise there should be 0 degrees of freedom
+         ! anyway, the check here will become more complex and therefore it is not impemented
+         ! NOTE: it is not necessary lowest N frequencies
+         error stop "not implemented"
+         ! for three atom systems we assume that the plane was constructed (or linear system is used)
       endif
-      do k=1,kend
-         h(1:n3,k)=res%hess(1:n3,izero(k))
-         isqm(  k)=res%freq(izero(k))
-      enddo
       j=kend
       do k=1,n3
          if(abs(res%freq(k)).gt.0.01_wp)then
@@ -475,33 +486,31 @@ subroutine numhess( &
    k=0
    do i=1,n3
       if(res%freq(i).lt.set%mode_vthr) res%lowmode=i
-      xsum=0
-      k=k+1
+      xsum = 0.0_wp
+      k = k + 1
       do ia=1,mol%n
          do ic=1,3
             ii = (ia-1)*3+ic
-            xsum=xsum+atmass(ia)*res%hess(ii,i)**2
-            !> %MM: CAUTION: Shouldn't this be "amass" instead of "atmass"? -> Would then be the reciprocal value
-            !>               of the mass and thus correspond to the definition in 2) below.
+            ! Take amass_amu -> we want the reduced mass in g/mol (amu) and not in atomic units
+            xsum = xsum + (amass_amu(ii))**2 * (res%hess(ii,i))**2
          enddo
       enddo
-      res%rmass(i)=xsum
+      res%rmass(i)= 1.0_wp / xsum
    enddo
 
    !--- IR intensity ---! (holds in a similar fashion also for Raman)
-   !  1. res%hess corresponds to the orthonormal eigenvectors of the hessian
-   !     matrix (-> normal modes of vibration). Mass-weighting is introduced
-   !     back again via multiplying with amass(j).
-   !     "Each vibrational normal mode - given in terms of
-   !      cartesian displacement vectors of all atoms - has been normalized to unity.
-   !      To obtain mass-weigthed normal coordinates divide the tabulated
-   !      modes by the reduced mass."
+   !  1. res%hess corresponds to the orthonormal eigenvectors of the mass-weighted Hessian
+   !     matrix (-> normal modes of vibration). By mass-weighting the Hessian matrix,
+   !     the normal modes are transformed into the mass-weighted space ("Q basis"), and
+   !     have the units [sqrt(mass) * length]
+   !     To obtain purely cartesian coordinates (-> transforming back into the Cartesian space),
+   !     the mass-weighted normal modes have to be divided by the square root of the mass of the respective atom.
    !
    !  2. res%hess(j,i) is the matrix which transforms a derivative with
    !     respect to the j-th cartesian coordinate ("dipd") into a derivative with
-   !     respect to the i-th (mass-weighted) normal coordinate.
+   !     respect to the i-th normal coordinate.
    !
-   !  3. amass(j) = 1/sqrt(m(j)); m(j) is given in atomic units (a.u.).
+   !  3. amass_au(j) = 1/sqrt(m(j)); m(j) is given in atomic units (a.u.).
    !
    !  4. matmul(D x H) = U
    !
@@ -518,7 +527,7 @@ subroutine numhess( &
       do k = 1, 3
          sum2 = 0.0_wp
          do j = 1, n3
-            sum2 = sum2 + dipd(k,j)*(res%hess(j,i)*amass(j))
+            sum2 = sum2 + dipd(k,j)*(res%hess(j,i)*amass_au(j))
          end do
          trdip(k) = sum2
       end do
@@ -530,7 +539,7 @@ subroutine numhess( &
          do k = 1,6
             sum2 = 0.0_wp
             do j = 1, n3
-               sum2 = sum2 + (res%hess(j,i)*amass(j))*dalphadr(k,j)
+               sum2 = sum2 + (res%hess(j,i)*amass_au(j))*dalphadr(k,j)
             enddo
             dalphadq(k,i) = sum2
          enddo
@@ -720,6 +729,43 @@ subroutine distort(mol,freq,u)
    mol%xyz = xyz2
 
 end subroutine distort
+
+!cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+subroutine rescale_freq(n3,htb,hess,hbias,freq,fc_tb,fc_bias,freq_scal)
+   use xtb_mctc_blas
+   implicit none
+   real(wp),intent(in) :: htb (n3,n3)
+   real(wp),intent(in) :: hess(n3,n3)
+   real(wp),intent(in) :: hbias(n3,n3)
+   real(wp),intent(in) :: freq(n3)
+   real(wp), intent(out) :: fc_tb(n3),fc_bias(n3)
+   real(wp), intent(out) :: freq_scal(n3) 
+   real(wp),allocatable :: v(:)
+   real(wp),allocatable :: fc_tmp(:)
+   real(wp), parameter :: alp1=1.27_wp, alp2=1.5e-4_wp
+   integer, intent(in) :: n3
+   integer :: j
+   
+   allocate(fc_tmp(n3),v(n3))
+   ! calculate fc_tb and fc_bias
+   do j=1,n3
+      v(1:n3) = hess(1:n3,j) ! modes
+      call mctc_gemv(htb,v,fc_tmp)
+      fc_tb(j) = mctc_dot(v,fc_tmp)
+      call mctc_gemv(hbias,v,fc_tmp)
+      fc_bias(j) = mctc_dot(v,fc_tmp)
+      if (abs(freq(j)) .gt. 1.0e-6_wp) then
+         freq_scal(j) = sqrt( (fc_tb(j)+alp2) / ( (fc_tb(j)+alp2) +  alp1*fc_bias(j) ) )
+         if (fc_tb(j) .lt. 0.0_wp .and. fc_bias(j) .ne. 0.0_wp) then
+            freq_scal(j) = -sqrt( (abs(fc_tb(j))+alp2) / ( (abs(fc_tb(j))+alp2) + alp1*fc_bias(j) ) )
+         end if
+      else
+         freq_scal(j) = 1.0_wp   
+      end if
+   end do
+end subroutine rescale_freq
+   
 
 !cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 

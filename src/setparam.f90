@@ -188,6 +188,7 @@ module xtb_setparam
    integer, parameter :: p_ext_ptb       = 17
    integer, parameter :: p_ext_mcgfnff   = 18
 
+   integer, parameter :: p_run_prescc  =   1
    integer, parameter :: p_run_scc    =   2
    integer, parameter :: p_run_grad   =   3
    integer, parameter :: p_run_opt    =   4
@@ -516,6 +517,9 @@ module xtb_setparam
 !! ------------------------------------------------------------------------
    !> PTB settings
    type(TPTBSetup) :: ptbsetup
+   !> GFN-FF manual setup of nb list via xcontrol
+   !  ffnb(42,i) stores the number of neighbors of atom i
+   integer, allocatable :: ffnb(:,:)
    end type TSet
 
    type(TSet) :: set

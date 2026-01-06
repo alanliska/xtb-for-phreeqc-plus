@@ -452,10 +452,16 @@ pure elemental function cngw(wf,cn,cnref)
    !$acc routine seq
    real(wp),intent(in) :: wf,cn,cnref
    real(wp)            :: cngw ! CN-gaussian-weight
+   real(wp)            :: val
 
    intrinsic :: exp
 
-   cngw = exp ( -wf * ( cn - cnref )**2 )
+   val = -wf * ( cn - cnref )**2
+   if (val < -200.0_wp) then ! technically, exp(-200) -> 1.383897e-87
+     cngw = 0.0_wp
+   else
+     cngw = exp ( val )
+   end if
 
 end function cngw
 
@@ -618,18 +624,20 @@ subroutine d4(dispm,nat,ndim,at,wf,g_a,g_c,covcn,gw,c6abns)
             norm = norm + cngw(twf,covcn(i),dispm%cn(ii,ia))
          enddo
       enddo
-      norm = 1._wp / norm
+      if (norm > 1e-80_wp) then
+         norm = 1._wp / norm
+      else
+         norm = 0.0_wp
+      end if
       do ii = 1, dispm%nref(ia)
          k = itbl(ii,i)
          do iii = 1, dispm%ncount(ii,ia)
             twf = iii*wf
             gw(k) = gw(k) + cngw(twf,covcn(i),dispm%cn(ii,ia)) * norm
          enddo
-!    --- okay, if we run out of numerical precision, gw(k) will be NaN.
-!        In case it is NaN, it will not match itself! So we can rescue
-!        this exception. This can only happen for very high CNs.
-         if (gw(k).ne.gw(k)) then
-            if (maxval(dispm%cn(:dispm%nref(ia),ia)).eq.dispm%cn(ii,ia)) then
+         if (norm == 0.0_wp) then
+            if (abs(maxval(dispm%cn(:dispm%nref(ia),ia)) &
+               & - dispm%cn(ii,ia)) < 1e-12_wp) then
                gw(k) = 1.0_wp
             else
                gw(k) = 0.0_wp
@@ -680,7 +688,8 @@ subroutine build_wdispmat(dispm,nat,ndim,at,itbl,xyz,par,c6abns,gw,wdispmat)
    !$omp parallel do shared(wdispmat) &
    !$omp shared(nat, at, xyz, itbl, par, dispm, c6abns, gw) &
    !$omp private(ia, k, j, ja, l, r4r2ij, cutoff, r2, oor6, oor8, oor10, &
-   !$omp& ii, jj, gwgw, c8abns, c10abns)
+   !$omp& ii, jj, gwgw, c8abns, c10abns) &
+   !$omp schedule(dynamic,32) collapse(2)
 !#endif
    do i = 1, nat
       do j = 1, nat
@@ -894,18 +903,20 @@ subroutine pbc_d4(dispm,nat,ndim,at,wf,g_a,g_c,covcn,gw,refc6)
             norm = norm + cngw(twf,covcn(i),dispm%cn(ii,ia))
          enddo
       enddo
-      norm = 1._wp / norm
+      if (norm > 1e-80_wp) then
+         norm = 1._wp / norm
+      else
+         norm = 0.0_wp
+      end if
       do ii = 1, dispm%nref(ia)
          k = itbl(ii,i)
          do iii = 1, dispm%ncount(ii,ia)
             twf = iii*wf
             gw(k) = gw(k) + cngw(twf,covcn(i),dispm%cn(ii,ia)) * norm
          enddo
-!    --- okay, if we run out of numerical precision, gw(k) will be NaN.
-!        In case it is NaN, it will not match itself! So we can rescue
-!        this exception. This can only happen for very high CNs.
-         if (gw(k).ne.gw(k)) then
-            if (maxval(dispm%cn(:dispm%nref(ia),ia)).eq.dispm%cn(ii,ia)) then
+         if (norm == 0.0_wp) then
+            if (abs(maxval(dispm%cn(:dispm%nref(ia),ia)) &
+               & - dispm%cn(ii,ia)) < 1e-12_wp) then
                gw(k) = 1.0_wp
             else
                gw(k) = 0.0_wp
@@ -1007,7 +1018,11 @@ subroutine weight_references(dispm, nat, atoms, g_a, g_c, wf, q, cn, zeff, gam, 
             dnorm = dnorm + 2*twf*(dispm%cn(iref, ati) - cn(iat)) * gw
          enddo
       end do
-      norm = 1.0_wp / norm
+      if (norm > 1e-80_wp) then
+         norm = 1.0_wp / norm
+      else
+         norm = 0.0_wp
+      end if
       ! acc loop vector private(expw, expd)
       do iref = 1, dispm%nref(ati)
          expw = 0.0_wp
@@ -1021,9 +1036,9 @@ subroutine weight_references(dispm, nat, atoms, g_a, g_c, wf, q, cn, zeff, gam, 
          enddo
 
          gwk = expw * norm
-         if (gwk /= gwk) then
-            if (maxval(dispm%cn(:dispm%nref(ati), ati)) &
-               & == dispm%cn(iref, ati)) then
+         if (norm == 0.0_wp) then
+            if (abs(maxval(dispm%cn(:dispm%nref(ati), ati)) &
+               & - dispm%cn(iref, ati)) < 1e-12_wp) then
                gwk = 1.0_wp
             else
                gwk = 0.0_wp
@@ -1033,9 +1048,6 @@ subroutine weight_references(dispm, nat, atoms, g_a, g_c, wf, q, cn, zeff, gam, 
          zerovec(iref, iat) = zeta(g_a,gi,dispm%q(iref,ati)+zi,zi) * gwk
 
          dgwk = expd*norm-expw*dnorm*norm**2
-         if (dgwk /= dgwk) then
-            dgwk = 0.0_wp
-         endif
          zetadcn(iref, iat) = zeta(g_a,gi,dispm%q(iref,ati)+zi,q(iat)+zi) * dgwk
          zetadq(iref, iat) = dzeta(g_a,gi,dispm%q(iref,ati)+zi,q(iat)+zi) * gwk
          zerodcn(iref, iat) = zeta(g_a,gi,dispm%q(iref,ati)+zi,zi) * dgwk
@@ -1093,7 +1105,8 @@ subroutine get_atomic_c6(dispm, nat, atoms, zetavec, zetadcn, zetadq, &
    !$omp parallel do default(none) shared(c6, dc6dcn, dc6dq) &
    !$omp shared(nat, atoms, dispm, zetavec, zetadcn, zetadq) &
    !$omp private(iat, ati, jat, atj, dc6, dc6dcni, dc6dcnj, dc6dqi, dc6dqj, &
-   !$omp& iref, jref, refc6)
+   !$omp& iref, jref, refc6) &
+   !$omp schedule(dynamic,32) collapse(2)
 #endif
    do iat = 1, nat
       do jat = 1, nat
@@ -1415,7 +1428,9 @@ subroutine disp_gradient_neigh &
 
          dE = -c6(iat, jat)*disp * 0.5_wp
          dG = -c6(iat, jat)*ddisp*rij
-         dS = spread(dG, 1, 3) * spread(rij, 2, 3) * 0.5_wp
+         dS(:, 1) = 0.5_wp * dG(1) * rij
+         dS(:, 2) = 0.5_wp * dG(2) * rij
+         dS(:, 3) = 0.5_wp * dG(3) * rij
 
          energies(iat) = energies(iat) + dE
          dEdcn(iat) = dEdcn(iat) - dc6dcn(iat, jat) * disp
@@ -1851,21 +1866,24 @@ subroutine disp_gradient_latp &
 
    real(wp), intent(inout) :: dEdq(:)
 
-   integer :: iat, jat, ati, atj, itr
+   integer :: iat, jat, nat, ati, atj, itr
 
    real(wp) :: cutoff2
    real(wp) :: r4r2ij, r0, rij(3), r2, t6, t8, t10, d6, d8, d10
    real(wp) :: dE, dG(3), dS(3, 3), disp, ddisp
 
+   nat = len(mol)
    cutoff2 = cutoff**2
    !$omp parallel do default(none) &
    !$omp reduction(+:energies, gradient, sigma, dEdcn, dEdq) &
-   !$omp shared(mol, trans, cutoff2, par, r4r2, c6, dc6dcn, dc6dq) &
+   !$omp shared(nat, mol, trans, cutoff2, par, r4r2, c6, dc6dcn, dc6dq) &
    !$omp private(iat, jat, itr, ati, atj, r2, rij, r4r2ij, r0, t6, t8, t10, &
-   !$omp&        d6, d8, d10, disp, ddisp, dE, dG, dS)
-   do iat = 1, len(mol)
-      ati = mol%at(iat)
-      do jat = 1, iat
+   !$omp&        d6, d8, d10, disp, ddisp, dE, dG, dS) &
+   !$omp schedule(dynamic,32) collapse(2)
+   do iat = 1, nat
+      do jat = 1, nat
+         if (jat > iat) cycle
+         ati = mol%at(iat)
          atj = mol%at(jat)
 
          r4r2ij = 3*r4r2(ati)*r4r2(atj)
@@ -1890,7 +1908,9 @@ subroutine disp_gradient_latp &
 
             dE = -c6(iat, jat)*disp * 0.5_wp
             dG = -c6(iat, jat)*ddisp*rij
-            dS = spread(dG, 1, 3) * spread(rij, 2, 3) * 0.5_wp
+            dS(:, 1) = 0.5_wp * dG(1) * rij
+            dS(:, 2) = 0.5_wp * dG(2) * rij
+            dS(:, 3) = 0.5_wp * dG(3) * rij
 
             energies(iat) = energies(iat) + dE
             dEdcn(iat) = dEdcn(iat) - dc6dcn(iat, jat) * disp
@@ -2021,74 +2041,138 @@ subroutine atm_gradient_latp &
    real(wp), intent(inout) :: sigma(:, :)
    real(wp), intent(inout) :: dEdcn(:)
 
-   integer :: iat, jat, kat, ati, atj, atk, jtr, ktr
+   integer :: iat, jat, kat, nat, ati, atj, atk, jtr, ktr
    real(wp) :: cutoff2
    real(wp) :: rij(3), rjk(3), rik(3), r2ij, r2jk, r2ik
    real(wp) :: c6ij, c6jk, c6ik, cij, cjk, cik, scale
    real(wp) :: dE, dG(3, 3), dS(3, 3), dCN(3)
    real(wp), parameter :: sr = 4.0_wp/3.0_wp
+   logical :: doPBC
 
    cutoff2 = cutoff**2
+   nat = len(mol) ! workaround for legacy Intel Fortran compilers
 
-   !$omp parallel do default(none) reduction(+:energies, gradient, sigma, dEdcn) &
-   !$omp shared(mol, r4r2, par, trans, cutoff2, c6, dc6dcn) &
-   !$omp private(iat, ati, jat, atj, kat, atk, c6ij, cij, c6ik, c6jk, cik, cjk, &
-   !$omp& rij, r2ij, ktr, rik, r2ik, rjk, r2jk, scale, dE, dG, dS, dCN)
-   do iat = 1, len(mol)
-      ati = mol%at(iat)
-      do jat = 1, iat
-         atj = mol%at(jat)
+   doPBC = .false.
+   if (size(trans, dim=2) > 1) doPBC = .true.
 
-         c6ij = c6(jat,iat)
-         cij = par%a1*sqrt(3.0_wp*r4r2(ati)*r4r2(atj))+par%a2
+   if (doPBC) then
+      !$omp parallel do default(none) reduction(+:energies, gradient, sigma, dEdcn) &
+      !$omp shared(mol, r4r2, par, trans, cutoff2, c6, dc6dcn, nat) &
+      !$omp private(iat, ati, jat, atj, kat, atk, c6ij, cij, c6ik, c6jk, cik, cjk, &
+      !$omp& rij, r2ij, jtr, ktr, rik, r2ik, rjk, r2jk, scale, dE, dG, dS, dCN) &
+      !$omp collapse(2) schedule(dynamic,32)
+      do iat = 1, nat
+         do jat = 1, nat
+            if (jat > iat) cycle
+            ati = mol%at(iat)
+            atj = mol%at(jat)
 
-         do kat = 1, jat
-            atk = mol%at(kat)
+            c6ij = c6(jat,iat)
+            cij = par%a1*sqrt(3.0_wp*r4r2(ati)*r4r2(atj))+par%a2
 
-            c6ik = c6(kat,iat)
-            c6jk = c6(kat,jat)
+            do kat = 1, jat
+               atk = mol%at(kat)
 
-            cik = par%a1*sqrt(3.0_wp*r4r2(ati)*r4r2(atk))+par%a2
-            cjk = par%a1*sqrt(3.0_wp*r4r2(atj)*r4r2(atk))+par%a2
+               c6ik = c6(kat,iat)
+               c6jk = c6(kat,jat)
 
-            do jtr = 1, size(trans, dim=2)
-               rij = mol%xyz(:, jat) - mol%xyz(:, iat) + trans(:, jtr)
-               r2ij = sum(rij**2)
-               if (r2ij > cutoff2 .or. r2ij < 1.0e-14_wp) cycle
-               do ktr = 1, size(trans, dim=2)
-                  if (jat == kat .and. jtr == ktr) cycle
-                  rik = mol%xyz(:, kat) - mol%xyz(:, iat) + trans(:, ktr)
-                  r2ik = sum(rik**2)
-                  if (r2ik > cutoff2 .or. r2ik < 1.0e-14_wp) cycle
-                  rjk = mol%xyz(:, kat) - mol%xyz(:, jat) + trans(:, ktr) &
-                     & - trans(:, jtr)
-                  r2jk = sum(rjk**2)
-                  if (r2jk > cutoff2 .or. r2jk < 1.0e-14_wp) cycle
+               cik = par%a1*sqrt(3.0_wp*r4r2(ati)*r4r2(atk))+par%a2
+               cjk = par%a1*sqrt(3.0_wp*r4r2(atj)*r4r2(atk))+par%a2
 
-                  call deriv_atm_triple(c6ij, c6ik, c6jk, cij, cjk, cik, &
-                     & r2ij, r2jk, r2ik, dc6dcn(iat,jat), dc6dcn(jat,iat), &
-                     & dc6dcn(jat,kat), dc6dcn(kat,jat), dc6dcn(iat,kat), &
-                     & dc6dcn(kat,iat), rij, rjk, rik, par%alp, dE, dG, dS, dCN)
+               do jtr = 1, size(trans, dim=2)
+                  rij = mol%xyz(:, jat) - mol%xyz(:, iat) + trans(:, jtr)
+                  r2ij = sum(rij**2)
+                  if (r2ij > cutoff2 .or. r2ij < 1.0e-14_wp) cycle
+                  do ktr = 1, size(trans, dim=2)
+                     if (jat == kat .and. jtr == ktr) cycle
+                     rik = mol%xyz(:, kat) - mol%xyz(:, iat) + trans(:, ktr)
+                     r2ik = sum(rik**2)
+                     if (r2ik > cutoff2 .or. r2ik < 1.0e-14_wp) cycle
+                     rjk = mol%xyz(:, kat) - mol%xyz(:, jat) + trans(:, ktr) &
+                        & - trans(:, jtr)
+                     r2jk = sum(rjk**2)
+                     if (r2jk > cutoff2 .or. r2jk < 1.0e-14_wp) cycle
 
-                  scale = par%s9 * triple_scale(iat, jat, kat)
-                  energies(iat) = energies(iat) + dE * scale/3
-                  energies(jat) = energies(jat) + dE * scale/3
-                  energies(kat) = energies(kat) + dE * scale/3
-                  gradient(:, iat) = gradient(:, iat) + dG(:, 1) * scale
-                  gradient(:, jat) = gradient(:, jat) + dG(:, 2) * scale
-                  gradient(:, kat) = gradient(:, kat) + dG(:, 3) * scale
-                  sigma(:, :) = sigma + dS * scale
-                  dEdcn(iat) = dEdcn(iat) + dCN(1) * scale
-                  dEdcn(jat) = dEdcn(jat) + dCN(2) * scale
-                  dEdcn(kat) = dEdcn(kat) + dCN(3) * scale
+                     call deriv_atm_triple(c6ij, c6ik, c6jk, cij, cjk, cik, &
+                        & r2ij, r2jk, r2ik, dc6dcn(iat,jat), dc6dcn(jat,iat), &
+                        & dc6dcn(jat,kat), dc6dcn(kat,jat), dc6dcn(iat,kat), &
+                        & dc6dcn(kat,iat), rij, rjk, rik, par%alp, dE, dG, dS, dCN)
 
+                     scale = par%s9 * triple_scale(iat, jat, kat)
+                     energies(iat) = energies(iat) + dE * scale / 3.0_wp
+                     energies(jat) = energies(jat) + dE * scale / 3.0_wp
+                     energies(kat) = energies(kat) + dE * scale / 3.0_wp
+                     gradient(:, iat) = gradient(:, iat) + dG(:, 1) * scale
+                     gradient(:, jat) = gradient(:, jat) + dG(:, 2) * scale
+                     gradient(:, kat) = gradient(:, kat) + dG(:, 3) * scale
+                     sigma(:, :) = sigma + dS * scale
+                     dEdcn(iat) = dEdcn(iat) + dCN(1) * scale
+                     dEdcn(jat) = dEdcn(jat) + dCN(2) * scale
+                     dEdcn(kat) = dEdcn(kat) + dCN(3) * scale
+
+                  end do
                end do
-            end do
 
+            end do
          end do
       end do
-   end do
+      !$omp end parallel do
+   else
+      !$omp parallel do default(none) reduction(+:energies, gradient, sigma, dEdcn) &
+      !$omp shared(mol, r4r2, par, trans, cutoff2, c6, dc6dcn, nat) &
+      !$omp private(iat, ati, jat, atj, kat, atk, c6ij, cij, c6ik, c6jk, cik, cjk, &
+      !$omp& rij, r2ij, rik, r2ik, rjk, r2jk, scale, dE, dG, dS, dCN) &
+      !$omp collapse(2) schedule(dynamic,32)
+      do iat = 1, nat
+         do jat = 1, nat
+            if (jat >= iat) cycle
+            rij = mol%xyz(1:3, jat) - mol%xyz(1:3, iat)
+            r2ij = sum(rij**2)
+            if (r2ij > cutoff2) cycle
+
+            do kat = 1, jat - 1
+
+               rik = mol%xyz(1:3, kat) - mol%xyz(1:3, iat)
+               r2ik = sum(rik**2)
+               if (r2ik > cutoff2) cycle
+               rjk = mol%xyz(1:3, kat) - mol%xyz(1:3, jat)
+               r2jk = sum(rjk**2)
+               if (r2jk > cutoff2) cycle
+
+               ati = mol%at(iat)
+               atj = mol%at(jat)
+               atk = mol%at(kat)
+
+               c6ij = c6(jat,iat)
+               c6ik = c6(kat,iat)
+               c6jk = c6(kat,jat)
+
+               cij = par%a1*sqrt(3.0_wp*r4r2(ati)*r4r2(atj))+par%a2
+               cik = par%a1*sqrt(3.0_wp*r4r2(ati)*r4r2(atk))+par%a2
+               cjk = par%a1*sqrt(3.0_wp*r4r2(atj)*r4r2(atk))+par%a2
+
+               call deriv_atm_triple(c6ij, c6ik, c6jk, cij, cjk, cik, &
+                  & r2ij, r2jk, r2ik, dc6dcn(iat,jat), dc6dcn(jat,iat), &
+                  & dc6dcn(jat,kat), dc6dcn(kat,jat), dc6dcn(iat,kat), &
+                  & dc6dcn(kat,iat), rij, rjk, rik, par%alp, dE, dG, dS, dCN)
+
+               scale = par%s9 * triple_scale(iat, jat, kat)
+               energies(iat) = energies(iat) + dE * scale / 3.0_wp
+               energies(jat) = energies(jat) + dE * scale / 3.0_wp
+               energies(kat) = energies(kat) + dE * scale / 3.0_wp
+               gradient(:, iat) = gradient(:, iat) + dG(:, 1) * scale
+               gradient(:, jat) = gradient(:, jat) + dG(:, 2) * scale
+               gradient(:, kat) = gradient(:, kat) + dG(:, 3) * scale
+               sigma(:, :) = sigma + dS * scale
+               dEdcn(iat) = dEdcn(iat) + dCN(1) * scale
+               dEdcn(jat) = dEdcn(jat) + dCN(2) * scale
+               dEdcn(kat) = dEdcn(kat) + dCN(3) * scale
+
+            end do
+         end do
+      end do
    !$omp end parallel do
+   end if
 
 end subroutine atm_gradient_latp
 
@@ -2195,8 +2279,8 @@ subroutine atm_gradient_latp_gpu &
    !   & -5.0_wp*(r2jk-r2ik)**2*(r2jk+r2ik)) / (rrr3*rrr2)
    !dGr = (-dang*c9*fdmp + dfdmp*c9*ang)/r2ij
    !dG(:, 1) = -dGr * rij
-   !dG(:, 2) = +dGr * rij 
-   !dS(:, :) = 0.5_wp * dGr * spread(rij, 1, 3) * spread(rij, 2, 3)
+   !dG(:, 2) = +dGr * rij
+   !dS(:, :) = 0.5_wp * dGr * spread(rij, 1, 3) * spread(rij, 2, 3) !< GCC perf: do not use spread
 
    !! Derivative w.r.t. i-k distance
    !dang = -0.375_wp*(r2ik**3+r2ik**2*(r2jk+r2ij) &
@@ -2204,8 +2288,8 @@ subroutine atm_gradient_latp_gpu &
    !   & -5.0_wp*(r2jk-r2ij)**2*(r2jk+r2ij)) / (rrr3*rrr2)
    !dGr = (-dang*c9*fdmp + dfdmp*c9*ang)/r2ik
    !dG(:, 1) = -dGr * rik + dG(:, 1)
-   !dG(:, 3) = +dGr * rik 
-   !dS(:, :) = 0.5_wp * dGr * spread(rik, 1, 3) * spread(rik, 2, 3) + dS
+   !dG(:, 3) = +dGr * rik
+   !dS(:, :) = 0.5_wp * dGr * spread(rik, 1, 3) * spread(rik, 2, 3) + dS !< GCC perf: do not use spread
 
    !! Derivative w.r.t. j-k distance
    !dang=-0.375_wp*(r2jk**3+r2jk**2*(r2ik+r2ij) &
@@ -2214,7 +2298,7 @@ subroutine atm_gradient_latp_gpu &
    !dGr = (-dang*c9*fdmp + dfdmp*c9*ang)/r2jk
    !dG(:, 2) = -dGr * rjk + dG(:, 2)
    !dG(:, 3) = +dGr * rjk + dG(:, 3)
-   !dS(:, :) = 0.5_wp * dGr * spread(rjk, 1, 3) * spread(rjk, 2, 3) + dS
+   !dS(:, :) = 0.5_wp * dGr * spread(rjk, 1, 3) * spread(rjk, 2, 3) + dS !< GCC perf: do not use spread
 
    !! CN derivative
    !dc9 = 0.5_wp*c9*(dc6dcn(iat,jat)/c6ij+dc6dcn(iat,kat)/c6ik)
@@ -2280,7 +2364,7 @@ pure subroutine deriv_atm_triple(c6ij, c6ik, c6jk, cij, cjk, cik, &
    integer, intent(in) :: alp
    real(wp), intent(out) :: dE, dG(3, 3), dS(3, 3), dCN(3)
 
-   real(wp) :: c9, dc9, ccc1, rrr1, rrr2, rrr3, ang, dang, fdmp, dfdmp, dGr, cr
+   real(wp) :: c9, dc9, ccc1, rrr1, rrr2, rrr3, ang_fact, ang, dang(3), fdmp, dfdmp, dGr(3), cralp
 
    c9 = -sqrt(c6ij*c6ik*c6jk)
 
@@ -2290,42 +2374,53 @@ pure subroutine deriv_atm_triple(c6ij, c6ik, c6jk, cij, cjk, cik, &
    rrr1 = sqrt(rrr2)
    rrr3 = rrr1*rrr2
 
-   ang = 0.375_wp * (r2ij+r2jk-r2ik)*(r2ij-r2jk+r2ik)*(-r2ij+r2jk+r2ik) &
-      & / (rrr3*rrr2) + 1.0_wp/(rrr3)
+   ang_fact = 0.375_wp / (rrr2*rrr3)
+   ang = ang_fact * (r2ij+r2jk-r2ik)*(r2ij-r2jk+r2ik)*(-r2ij+r2jk+r2ik) &
+      & + 1.0_wp/(rrr3)
 
-   cr = (ccc1/rrr1)**(1.0_wp/3.0_wp)
-   fdmp = 1.0_wp/(1.0_wp + 6.0_wp*cr**alp)
-   dfdmp = -(2.0_wp*alp*cr**alp) * fdmp**2
+   cralp = (ccc1/rrr1)**(real(alp, kind=wp)/3.0_wp)
+   fdmp = 1.0_wp/(1.0_wp + 6.0_wp*cralp)
+   dfdmp = -(2.0_wp*alp*cralp) * fdmp**2
 
    ! Energy contribution
    dE = -fdmp*ang*c9
 
    ! Derivative w.r.t. i-j distance
-   dang = -0.375_wp*(r2ij**3+r2ij**2*(r2jk+r2ik) &
+   dang(1) = -ang_fact*(r2ij**3+r2ij**2*(r2jk+r2ik) &
       & +r2ij*(3.0_wp*r2jk**2+2.0_wp*r2jk*r2ik+3.0_wp*r2ik**2) &
-      & -5.0_wp*(r2jk-r2ik)**2*(r2jk+r2ik)) / (rrr3*rrr2)
-   dGr = (-dang*c9*fdmp + dfdmp*c9*ang)/r2ij
-   dG(:, 1) = -dGr * rij
-   dG(:, 2) = +dGr * rij 
-   dS(:, :) = 0.5_wp * dGr * spread(rij, 1, 3) * spread(rij, 2, 3)
-
+      & -5.0_wp*(r2jk-r2ik)**2*(r2jk+r2ik))
+   dGr(1) = (-dang(1)*c9*fdmp + dfdmp*c9*ang)/r2ij
    ! Derivative w.r.t. i-k distance
-   dang = -0.375_wp*(r2ik**3+r2ik**2*(r2jk+r2ij) &
-      & +r2ik*(3.0_wp*r2jk**2+2.0*r2jk*r2ij+3.0_wp*r2ij**2) &
-      & -5.0_wp*(r2jk-r2ij)**2*(r2jk+r2ij)) / (rrr3*rrr2)
-   dGr = (-dang*c9*fdmp + dfdmp*c9*ang)/r2ik
-   dG(:, 1) = -dGr * rik + dG(:, 1)
-   dG(:, 3) = +dGr * rik 
-   dS(:, :) = 0.5_wp * dGr * spread(rik, 1, 3) * spread(rik, 2, 3) + dS
-
+   dang(2) = -ang_fact*(r2ik**3+r2ik**2*(r2jk+r2ij) &
+      & +r2ik*(3.0_wp*r2jk**2+2.0_wp*r2jk*r2ij+3.0_wp*r2ij**2) &
+      & -5.0_wp*(r2jk-r2ij)**2*(r2jk+r2ij))
+   dGr(2) = (-dang(2)*c9*fdmp + dfdmp*c9*ang)/r2ik
    ! Derivative w.r.t. j-k distance
-   dang=-0.375_wp*(r2jk**3+r2jk**2*(r2ik+r2ij) &
+   dang(3)= -ang_fact*(r2jk**3+r2jk**2*(r2ik+r2ij) &
       & +r2jk*(3.0_wp*r2ik**2+2.0_wp*r2ik*r2ij+3.0_wp*r2ij**2) &
-      & -5.0_wp*(r2ik-r2ij)**2*(r2ik+r2ij)) / (rrr3*rrr2)
-   dGr = (-dang*c9*fdmp + dfdmp*c9*ang)/r2jk
-   dG(:, 2) = -dGr * rjk + dG(:, 2)
-   dG(:, 3) = +dGr * rjk + dG(:, 3)
-   dS(:, :) = 0.5_wp * dGr * spread(rjk, 1, 3) * spread(rjk, 2, 3) + dS
+      & -5.0_wp*(r2ik-r2ij)**2*(r2ik+r2ij))
+   dGr(3) = (-dang(3)*c9*fdmp + dfdmp*c9*ang)/r2jk
+
+   dG(:, 1) = -dGr(1) * rij
+   dG(:, 1) = -dGr(2) * rik + dG(:, 1)
+   dG(:, 2) = +dGr(1) * rij
+   dG(:, 2) = -dGr(3) * rjk + dG(:, 2)
+   dG(:, 3) = +dGr(2) * rik
+   dG(:, 3) = +dGr(3) * rjk + dG(:, 3)
+
+   dS(:, 1) = dGr(1) * rij(1) * rij
+   dS(:, 2) = dGr(1) * rij(2) * rij
+   dS(:, 3) = dGr(1) * rij(3) * rij
+
+   dS(:, 1) = dGr(2) * rik(1) * rik + dS(:, 1)
+   dS(:, 2) = dGr(2) * rik(2) * rik + dS(:, 2)
+   dS(:, 3) = dGr(2) * rik(3) * rik + dS(:, 3)
+
+   dS(:, 1) = dGr(3) * rjk(1) * rjk + dS(:, 1)
+   dS(:, 2) = dGr(3) * rjk(2) * rjk + dS(:, 2)
+   dS(:, 3) = dGr(3) * rjk(3) * rjk + dS(:, 3)
+
+   dS = 0.5_wp * dS
 
    ! CN derivative
    dc9 = 0.5_wp*c9*(dc6ij/c6ij+dc6ik/c6ik)

@@ -91,10 +91,10 @@ write(iunit,'(3x,a)') &
    "J. Seibert, P. Shushkov, S. Spicher, M. Stahn, M. Steiner, T. Strunk,", &
    "J. Stückrath, T. Rose, and J. Unsleber", &
    "",&
-   "Parallel (OpenMP) version for Android (arm, pie) ",&
+   "Parallel (OpenMP) version for Android (x86_64, pie) ",&
    "linked with high-performance BLAS and LAPACK libraries",&
    "compiled by A. Liska & V. Ruzickova",&
-   "on September 10, 2024.",&
+   "on August 10, 2025.",&
    ""
 end subroutine citation
 
@@ -115,8 +115,10 @@ subroutine help(iunit)
    "-c, --chrg INT",&
    "    specify molecular charge as INT, overrides .CHRG file and xcontrol option",&
    "",&
-   "--ceh",&
-   "    calculate CEH (Charge-Extended Hückel model) charges and write them to ceh.charges file",&
+   "--ceh <grad> [REAL]",&
+   "    calculate CEH (Charge-Extended Hückel model) charges and write them to the ceh.charges file",&
+   "    optionally, calculate numerical gradients and write them to the ceh.charges.numgrad file",&
+   "    with an adjustable step size for the numerical gradients.",&
    "",&
    "-u, --uhf INT",&
    "    specify number of unpaired electrons as INT, overrides .UHF file and xcontrol option",&

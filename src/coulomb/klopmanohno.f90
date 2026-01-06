@@ -498,20 +498,24 @@ subroutine getCoulombDerivsCluster(mol, itbl, gamAverage, gExp, hardness, &
    !> Derivative of Coulomb matrix w.r.t. strain deformations
    real(wp), intent(out) :: djdL(:, :, :)
 
-   integer :: iat, jat, ish, jsh, ii, jj, iid, jid
+   integer :: iat, jat, nat, ish, jsh, ii, jj, iid, jid
    real(wp) :: r1, g1, gij, vec(3), dG(3), dS(3, 3)
 
    djdr(:, :, :) = 0.0_wp
    djdtr(:, :) = 0.0_wp
    djdL(:, :, :) = 0.0_wp
 
+   nat = len(mol) ! workaround for legacy Intel Fortran compilers
+
    !$omp parallel do default(none) reduction(+:djdr, djdtr, djdL) &
-   !$omp shared(mol, itbl, qvec, gExp, hardness) &
-   !$omp private(iat, jat, ish, jsh, ii, jj, iid, jid, r1, g1, gij, vec, dG, dS)
-   do iat = 1, len(mol)
-      ii = itbl(1, iat)
-      iid = mol%id(iat)
-      do jat = 1, iat-1
+   !$omp shared(mol, itbl, qvec, gExp, hardness, nat) &
+   !$omp private(iat, jat, ish, jsh, ii, jj, iid, jid, r1, g1, gij, vec, dG, dS) &
+   !$omp collapse(2) schedule(dynamic,32)
+   do iat = 1, nat
+      do jat = 1, nat
+         if (jat >= iat) cycle
+         ii = itbl(1, iat)
+         iid = mol%id(iat)
          jj = itbl(1, jat)
          jid = mol%id(jat)
          vec(:) = mol%xyz(:, jat) - mol%xyz(:, iat)
@@ -521,7 +525,9 @@ subroutine getCoulombDerivsCluster(mol, itbl, gamAverage, gExp, hardness, &
                gij = gamAverage(hardness(ish, iid), hardness(jsh, jid))
                g1 = 1.0_wp / (r1**gExp + gij**(-gExp))
                dG(:) = -vec*r1**(gExp-2.0_wp) * g1 * g1**(1.0_wp/gExp)
-               dS(:, :) = 0.5_wp * spread(dG, 1, 3) * spread(vec, 2, 3)
+               dS(:, 1) = 0.5_wp * dG(1) * vec
+               dS(:, 2) = 0.5_wp * dG(2) * vec
+               dS(:, 3) = 0.5_wp * dG(3) * vec
                djdr(:, iat, jj+jsh) = djdr(:, iat, jj+jsh) - dG*qvec(ii+ish)
                djdr(:, jat, ii+ish) = djdr(:, jat, ii+ish) + dG*qvec(jj+jsh)
                djdtr(:, jj+jsh) = djdtr(:, jj+jsh) + dG*qvec(ii+ish)
@@ -675,7 +681,9 @@ pure subroutine getRDeriv(vec, gij, gExp, rTrans, alpha, scale, dG, dS)
       dd = -r1**(gExp-2.0_wp) * g1 * g1**(1.0_wp/gExp) &
          & - 2*alpha*exp(-arg)/(sqrtpi*r1**2) + erf(alpha*r1)/(r1**3)
       dG = dG + rij*dd
-      dS = dS + 0.5_wp * dd*spread(rij, 1, 3)*spread(rij, 2, 3)
+      dS(:, 1) = dS(:, 1) + 0.5_wp * dd * rij(1) * rij
+      dS(:, 2) = dS(:, 2) + 0.5_wp * dd * rij(2) * rij
+      dS(:, 3) = dS(:, 3) + 0.5_wp * dd * rij(3) * rij
    enddo
    dG = dG * scale
    dS = dS * scale

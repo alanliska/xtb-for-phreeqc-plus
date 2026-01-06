@@ -14,11 +14,11 @@ $ export PATH=$PATH:/path/to/include
 $ export CFLAGS="-fPIC -pie"
 $ export CXXFLAGS="-fPIC -pie"
 $ export FFLAGS="-fPIC -pie"
-$ export LDFLAGS="-fPIC -pie -static"
+$ export LDFLAGS="-fPIC -pie -static -Wl,-z,max-page-size=16384"
 $ export CC=/path/to/your/cross-compiler
 $ export CXX=/path/to/your/cross-compiler
 $ export FC=/path/to/your/cross-compiler
-$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE
+$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=FALSE -DCMAKE_BUILD_TYPE=Release
 ```
 
 open link.txt files and if they contain libblas.a in front of liblapack.a, change their order; for shared objects (*.so) delete -static manually to avoid linking error
@@ -37,11 +37,11 @@ $ export PATH=$PATH:/path/to/include
 $ export CFLAGS="-fPIC -pie"
 $ export CXXFLAGS="-fPIC -pie"
 $ export FFLAGS="-fPIC -pie"
-$ export LDFLAGS="-fPIC -pie -static"
+$ export LDFLAGS="-fPIC -pie -static -Wl,-z,max-page-size=16384"
 $ export CC=/path/to/your/cross-compiler
 $ export CXX=/path/to/your/cross-compiler
 $ export FC=/path/to/your/cross-compiler
-$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=TRUE
+$ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/install -DBLAS_LIBRARIES=/path/to/libblas.a -DLAPACK_LIBRARIES=/path/to/liblapack.a -DWITH_OpenMP=TRUE -DCMAKE_BUILD_TYPE=Release
 ```
 
 open link.txt files and if they contain libblas.a in front of liblapack.a, change their order; for shared objects (*.so) delete -static manually to avoid linking error ; substitute /path/libgomp.so for -lgomp and /path/libdl.so for -ldl

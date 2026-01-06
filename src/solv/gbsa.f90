@@ -206,9 +206,6 @@ module xtb_solv_gbsa
    real(wp), parameter :: ah1 = 3._wp/(4.0_wp*w)
    real(wp), parameter :: ah3 = -1._wp/(4.0_wp*w3)
 
-   !> Surface tension (in au)
-   real(wp), parameter :: gammas = 1.0e-5_wp
-
    !> Salt screening
    real(wp), parameter :: kappaConst = 0.7897e-3_wp
 
@@ -697,8 +694,10 @@ subroutine getADet(nAtom, xyz, rad, aDet)
       rad3 = rad2 * rad(iat)
       vec(:) = xyz(:, iat) - center
       r2 = sum(vec**2)
-      inertia(:, :) = inertia + rad3 * ((r2 + tof*rad2) * unity &
-         & - spread(vec, 1, 3) * spread(vec, 2, 3))
+      inertia(:, :) = inertia + rad3 * (r2 + tof*rad2) * unity
+      inertia(:, 1) = inertia(:, 1) - rad3 * vec(1) * vec
+      inertia(:, 2) = inertia(:, 2) - rad3 * vec(2) * vec
+      inertia(:, 3) = inertia(:, 3) - rad3 * vec(3) * vec
    end do
 
    aDet = sqrt(matDet3x3(inertia)**(1.0_wp/3.0_wp)/(tof*totRad3))
@@ -748,8 +747,10 @@ subroutine addADetDeriv(nAtom, xyz, rad, kEps, qvec, gradient)
       rad3 = rad2 * rad(iat)
       vec(:) = xyz(:, iat) - center
       r2 = sum(vec**2)
-      inertia(:, :) = inertia + rad3 * ((r2 + tof*rad2) * unity &
-         & - spread(vec, 1, 3) * spread(vec, 2, 3))
+      inertia(:, :) = inertia + rad3 * (r2 + tof*rad2) * unity
+      inertia(:, 1) = inertia(:, 1) - rad3 * vec(1) * vec
+      inertia(:, 2) = inertia(:, 2) - rad3 * vec(2) * vec
+      inertia(:, 3) = inertia(:, 3) - rad3 * vec(3) * vec
    end do
    aDet = sqrt(matDet3x3(inertia)**(1.0_wp/3.0_wp)/(tof*totRad3))
 

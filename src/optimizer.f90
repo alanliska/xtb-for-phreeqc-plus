@@ -412,7 +412,7 @@ subroutine ancopt(env,ilog,mol,chk,calc, &
       
       write(env%unit,scifmt) "energy convergence", ethr,    "Eh  "
       write(env%unit,scifmt) "grad. convergence ", gthr,    "Eh/α"
-      write(env%unit,dblfmt) "maxmium RF displ. ", maxdispl,"    "
+      write(env%unit,dblfmt) "maximum RF displ. ", maxdispl,"    "
       write(env%unit,scifmt) "Hlow (freq-cutoff)", hlow,    "    "
       write(env%unit,dblfmt) "Hmax (freq-cutoff)", hmax,    "    "
       write(env%unit,dblfmt) "S6 in model hess. ", s6,      "    "
@@ -437,6 +437,7 @@ subroutine ancopt(env,ilog,mol,chk,calc, &
          call env%error("Could not read hessian from file.", source)
          return
       endif
+
       ! do not reset the hessian
       maxmicro = maxopt
       ex = .true.
@@ -470,16 +471,6 @@ subroutine ancopt(env,ilog,mol,chk,calc, &
          call env%error("Calculation of model hessian failed", source)
          return
       end if
-      
-      ! blow up Hessian !
-      k=0
-      do i=1,nat3
-         do j=1,i
-            k=k+1
-            h(i,j)=fc(k)
-            h(j,i)=fc(k)
-         enddo
-      enddo
 
       thr=1.d-11
    
@@ -501,12 +492,6 @@ subroutine ancopt(env,ilog,mol,chk,calc, &
       thr=1.d-10
 
    endif
-  
-   if (debug(2) .and. nat3 <= 30) then !######## DEBUG ########
-      write(env%unit,'(/,''Hessian matrix'')')
-      write(hessfmt,'(a,i0,a)') '(', nat3, 'F10.6)'
-      write(env%unit,hessfmt) (h(:,i), i=1,nat3)
-   endif
 
    ! project out translational and rotational modes !
    if(modef.eq.0)then
@@ -518,6 +503,22 @@ subroutine ancopt(env,ilog,mol,chk,calc, &
       endif
    else
       call trproj(molopt%n,nat3,molopt%xyz,fc,.false.,modef,pmode,modef) ! NMF
+   endif
+
+   ! blow up Hessian !
+   k=0
+   do i=1,nat3
+      do j=1,i
+         k=k+1
+         h(i,j)=fc(k)
+         h(j,i)=fc(k)
+      enddo
+   enddo
+
+   if (debug(2) .and. nat3 <= 30) then !######## DEBUG ########
+      write(env%unit,'(/,''Hessian matrix'')')
+      write(hessfmt,'(a,i0,a)') '(', nat3, 'F10.6)'
+      write(env%unit,hessfmt) (h(:,i), i=1,nat3)
    endif
    
    if (profile) call timer%measure(2) ! stop timer for model Hessian
@@ -849,7 +850,7 @@ subroutine relax(env,iter,mol,anc,restart,maxcycle,maxdispl,ethr,gthr, &
       write(env%unit,'(5x,"change   ",e18.7,1x,"Eh")')                      echng
       write(env%unit,'(3x,"gradient norm :",f14.7,1x,"Eh/α")',advance='no') gnorm
       write(env%unit,'(3x,"predicted",e18.7)',advance='no')                 depred
-      write(env%unit,'(1x,"("f7.2"%)")')         (depred-echng)/echng*100
+      write(env%unit,'(1x,"(",f7.2,"%)")')       (depred-echng)/(echng+1e-34_wp)*100
    endif
    
    ! check 0 energy case !
@@ -1006,6 +1007,7 @@ pure subroutine solver_ssyevx(n,thr,A,U,e,fail)
    j=1
    call lapack_syevx('V','I','U',n,A,n,dum,dum,j,j,thr, &
    &           i,e,U,n,work,lwork,iwork,ifail,info)
+   fail = .false.
    if (info.ne.0) fail = .true.
 
    deallocate(iwork,work,ifail)
@@ -1032,6 +1034,7 @@ pure subroutine solver_sspevx(n,thr,A,U,e,fail)
 
    j=1
    call lapack_spevx('V','I','U',n,A,dum,dum,j,j,thr,i,e,U,n,work,iwork,ifail,info)
+   fail = .false.
    if (info.ne.0) fail = .true.
 
    deallocate(iwork,work,ifail)

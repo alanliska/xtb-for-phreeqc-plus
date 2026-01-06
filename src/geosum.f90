@@ -12,7 +12,7 @@
 ! MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ! GNU Lesser General Public License for more details.
 !
-! You should have received a copy of the GNU Lesser General Public Licen
+! You should have received a copy of the GNU Lesser General Public License
 ! along with xtb.  If not, see <https://www.gnu.org/licenses/>.
 
 subroutine geosum(n,ic,xyzin)
@@ -211,6 +211,7 @@ end subroutine
 !-------------------------------------------------
 
 subroutine rmblank(as,re)
+   implicit integer (i-n)
    character(len=*) as
    character(len=*) re
 
@@ -227,6 +228,7 @@ subroutine rmblank(as,re)
 end subroutine rmblank
 
 subroutine xbangle(xyz,angle)
+   implicit integer (i-n)
    implicit double precision (a-h,o-z)
    dimension xyz(3,3)
    !********************************************************************
@@ -255,6 +257,7 @@ subroutine xbangle(xyz,angle)
    return
 end subroutine xbangle
 subroutine xdihed(xyz,angle)
+   implicit integer (i-n)
    implicit double precision (a-h,o-z)
    dimension xyz(3,4)
    !********************************************************************

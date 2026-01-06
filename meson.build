@@ -30,6 +30,11 @@ project(
   ],
 )
 
+# Check for specific unsupported meson versions
+ if meson.version().version_compare('==1.8.0') or meson.version().version_compare('==1.8.1')
+   error('Meson versions 1.8.0 and 1.8.1 have known issues — please use any other version ≥ 0.62.0')
+ endif
+
 install = not meson.is_subproject()
 install_modules = install and get_option('install_modules')
 
