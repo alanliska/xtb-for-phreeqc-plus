@@ -59,7 +59,7 @@ $ make install
 [![DOI](https://img.shields.io/badge/DOI-10.1002%2Fwcms.1493-blue)](https://doi.org/10.1002/wcms.1493)
 [![Github Downloads All Releases](https://img.shields.io/github/downloads/grimme-lab/xtb/total)](https://github.com/grimme-lab/xtb/releases)
 
-This is the offical repository of the `xtb` program package developed by the Grimme group in Bonn.
+This is the official repository of the `xtb` program package developed by the Grimme group in Bonn.
 
 <div align="center">
 <img src="./assets/logo/xtb.svg" alt="Extended Tight Binding" width="220">
@@ -79,14 +79,15 @@ Bleeding edge releases (Linux only) of the latest source from this repository ar
 This projects supports two build systems, meson and CMake.
 A short guide on the usage of each is given here, follow the linked instructions for a more detailed information ([meson guide](./meson/README.adoc), [CMake guide](./cmake/README.adoc)).
 
-**Compilers**: 
+**Compilers**:
   1. ifort(<=2021.10.0), icc(<=2021.10.0)
-  2. gfortran(<=13.2.0), gcc(<=13.2.0) 
+  2. gfortran, gcc
+  3. ifx, icx (some versions may not work)
 
 
 ### Meson
 
-Using [meson](https://mesonbuild.com/) as build system requires you to install a fairly new version like 0.62 or newer.
+Using [meson](https://mesonbuild.com/) as build system requires you to install a fairly new version like 0.62 or newer (except 1.8.0).
 To use the default backend of meson you have to install [ninja](https://ninja-build.org/) version 1.7 or newer.
 
 ```bash
@@ -94,6 +95,27 @@ export FC=ifort CC=icc
 meson setup build --buildtype release --optimization 2 -Dfortran_link_args="-qopenmp"
 ninja -C build test
 ```
+
+> [!IMPORTANT]
+> Compilation with `meson` on macOS differs slightly from the protocol for Linux-based systems. Different BLAS libraries can lead to deviating results in rare cases – please stick to the following instructions.
+
+<details>
+  <summary><b>Setting up meson on macOS</b></summary>
+
+#### Compiling with meson on macOS
+
+1. **Use Homebrew for Package Management**: Install dependencies like `gcc`, `gfortran`, and `openblas` using Homebrew.
+[Further information](https://brew.sh/) on how to setup `brew`.
+Example:
+   ```bash
+   brew install gcc gfortran openblas
+   ```
+2. **meson setup call with appropriate environment variables**: Use the following adapted `meson setup` call to compile `xtb` on macOS. Obviously, the paths to the libraries might differ on your system.
+   ```bash
+   LDFLAGS="-L/opt/homebrew/opt/openblas/lib" CPPFLAGS="-I/opt/homebrew/opt/openblas/include" FC=gfortran-14 CC=gcc-14 meson setup _build --buildtype release -Dlapack=openblas
+   ```
+</details>
+<br>
 
 Make sure the testsuite is running without errors.
 
@@ -227,6 +249,10 @@ for GFN-xTB:
 for GFN-FF:
 - S. Spicher and S. Grimme, *Angew. Chem. Int. Ed.*, **2020**, 59, 15665–15673
   DOI: [10.1002/anie.202004239](https://doi.org/10.1002/anie.202004239)
+
+for PTB:
+- S. Grimme, M. Müller, A. Hansen, *J. Chem. Phys.* **2023**, 158, 124111.
+  DOI: [10.1063/5.0137838](https://doi.org/10.1063/5.0137838)
 
 for GBSA and ALPB implicit solvation:
 - S. Ehlert, M. Stahn, S. Spicher, S. Grimme,
